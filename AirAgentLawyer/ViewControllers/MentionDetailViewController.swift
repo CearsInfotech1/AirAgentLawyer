@@ -8,6 +8,14 @@
 
 import UIKit
 
+extension String {
+    func heightWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: CGFloat.max)
+        let boundingBox = self.boundingRectWithSize(constraintRect, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        
+        return boundingBox.height
+    }
+}
 class MentionDetailViewController: UIViewController {
 
     @IBOutlet var lblPrincipleName : UILabel!
@@ -19,6 +27,7 @@ class MentionDetailViewController: UIViewController {
     @IBOutlet var courtAdd1 : UILabel!
     @IBOutlet var courtAdd2 : UILabel!
     @IBOutlet var Description : UILabel!
+    @IBOutlet var descView : UIView!
     
     var objOfMention : MentionRequest = MentionRequest()
     var agentID : String = ""
@@ -83,6 +92,15 @@ class MentionDetailViewController: UIViewController {
                         self.courtAdd1.text = self.respone.valueForKey("Address1") as? String
                         self.courtAdd2.text = self.respone.valueForKey("Address2") as? String
                         self.Description.text = self.respone.valueForKey("Note") as? String
+                        
+//                        let descVal : String = (self.respone.valueForKey("Note") as? String)!
+//                        let sizeHeight = descVal.heightWithConstrainedWidth(self.view.frame.size.width, font: UIFont.systemFontOfSize(16.0))
+//                        print("label heih",sizeHeight)
+//                        self.descView.frame.size.height = sizeHeight + 10
+//                        self.Description.frame.size.height = sizeHeight
+//                        self.Description.backgroundColor = UIColor.redColor()
+//                        self.view.frame.size.height = 662 + sizeHeight
+//                        self.Description.text = self.respone.valueForKey("Note") as? String
                     }
                 }
                 else
