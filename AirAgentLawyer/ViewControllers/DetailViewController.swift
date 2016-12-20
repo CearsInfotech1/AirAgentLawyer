@@ -26,7 +26,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBAction func clkBack(sender: UIButton) {
         self.navigationController?.popViewControllerAnimated(true)
     }
-        
+    
+    
     //MARK : tableview delegate and datasource
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -86,8 +87,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         else if indexPath.row == 2
         {
-             let cell:ButtonCell = tableView.dequeueReusableCellWithIdentifier("ButtonCell") as! ButtonCell
-            
+            let cell:ButtonCell = tableView.dequeueReusableCellWithIdentifier("ButtonCell") as! ButtonCell
             
             cell.selectionStyle = .None
             return cell
@@ -102,6 +102,14 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     //MARK: View Detail clicked
     @IBAction func btnViewDetailClick(sender : UIButton)
+    {
+        let mentionDetailVC = self.storyboard?.instantiateViewControllerWithIdentifier("MentionDetailViewController") as! MentionDetailViewController
+        mentionDetailVC.objOfMention = self.obj
+        self.navigationController?.pushViewController(mentionDetailVC, animated: true)
+    }
+    
+    //MARK: Chat clicked
+    @IBAction func btnChatClick(sender : UIButton)
     {
         let mentionDetailVC = self.storyboard?.instantiateViewControllerWithIdentifier("MentionDetailViewController") as! MentionDetailViewController
         mentionDetailVC.objOfMention = self.obj
