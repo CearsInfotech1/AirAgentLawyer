@@ -47,7 +47,7 @@ class MentionDetailViewController: UIViewController {
         
         GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))
         print("mention is",objOfMention.MentionId)
-        let str = "Agent/FullmentionDetail?MentionId="+objOfMention.MentionId
+        let str = "Agent/FullmentionDetail?MentionId="+String(objOfMention.MentionId)
         
         let request = NSMutableURLRequest(URL: NSURL(string: BASE_URL+str)!)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

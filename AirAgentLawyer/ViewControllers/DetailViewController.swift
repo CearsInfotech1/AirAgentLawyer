@@ -111,9 +111,22 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //MARK: Chat clicked
     @IBAction func btnChatClick(sender : UIButton)
     {
-        let mentionDetailVC = self.storyboard?.instantiateViewControllerWithIdentifier("MentionDetailViewController") as! MentionDetailViewController
-        mentionDetailVC.objOfMention = self.obj
-        self.navigationController?.pushViewController(mentionDetailVC, animated: true)
+        let messageView: MessageViewController = MessageViewController()
+        messageView.receiverDict = NSMutableDictionary(dictionary: ["contactname":obj.ClientName,"toId": obj.MentionId])
+        
+        let user_Data = NSUserDefaults.standardUserDefaults().objectForKey("USER_OBJECT") as? NSData
+        
+        if let userData = user_Data {
+            let userObj = NSKeyedUnarchiver.unarchiveObjectWithData(userData)
+            
+            if let userData_val = userObj {
+                
+                print("userobject : ", userData_val)
+                messageView.userDict = NSMutableDictionary(dictionary: ["contactname":userData_val["Token"] as! String, "token":userData_val["Token"] as! String,"userid": String(userData_val["userid"] as! Int)])
+            }
+        }
+        
+        self.navigationController?.pushViewController(messageView, animated: true)
     }
     
     

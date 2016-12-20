@@ -39,7 +39,7 @@ class ChatSubmit : UITableViewCell
     @IBOutlet var btnSubmitOutCome : UIButton!
     
 }
-class GlobalClass {
+class GlobalClass: NSObject {
     
     var delegate :GlobalDelegate?
     

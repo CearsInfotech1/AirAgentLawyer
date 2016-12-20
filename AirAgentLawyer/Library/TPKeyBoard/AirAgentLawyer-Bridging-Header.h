@@ -6,3 +6,12 @@
 #import "RSDFDatePickerView.h"
 #import "UIImage+GIF.h"
 #import "UIImageView+WebCache.h"
+
+#import "JSQMessagesViewController.h"
+#import "JSQSystemSoundPlayer.h"
+#import "JSQMessagesBubbleImage.h"
+#import "JSQMessagesAvatarImage.h"
+#import "JSQMessagesBubbleImageFactory.h"
+#import "JSQMessagesAvatarImageFactory.h"
+
+#import "MessageViewController.h"

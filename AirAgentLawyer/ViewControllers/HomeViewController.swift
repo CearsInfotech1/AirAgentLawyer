@@ -75,7 +75,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                                 mentionObj.CourtCity = arrMention[i].valueForKey("CourtCity") as? String ?? ""
                                 mentionObj.CourtName = arrMention[i].valueForKey("CourtName") as? String ?? ""
                                 mentionObj.MentionDate = arrMention[i].valueForKey("MentionDate") as? String ?? ""
-                                mentionObj.MentionId = arrMention[i].valueForKey("MentionId") as? String ?? ""
+                                mentionObj.MentionId = arrMention[i].valueForKey("MentionId") as? Int
                                 mentionObj.Principleid = arrMention[i].valueForKey("Principleid") as? String ?? ""
                                 mentionObj.Status = arrMention[i].valueForKey("Status") as? String ?? ""
                                 

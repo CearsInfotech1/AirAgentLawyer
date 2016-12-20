@@ -11,12 +11,12 @@ import UIKit
 class MentionRequest: NSObject {
 
     var AgentId : Int!
-    var ClientName = "";
-    var CourtAddress = "";
-    var CourtCity = "";
-    var CourtName = "";
-    var MentionDate = "";
-    var MentionId = "";
-    var Principleid = "";
-    var Status = "";
+    var ClientName = ""
+    var CourtAddress = ""
+    var CourtCity = ""
+    var CourtName = ""
+    var MentionDate = ""
+    var MentionId : Int!
+    var Principleid = ""
+    var Status = ""
 }
