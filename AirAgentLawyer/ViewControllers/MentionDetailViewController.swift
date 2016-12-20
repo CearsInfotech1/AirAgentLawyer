@@ -23,6 +23,8 @@ class MentionDetailViewController: UIViewController {
     var objOfMention : MentionRequest = MentionRequest()
     var agentID : String = ""
     var Token : String = ""
+    var respone : NSDictionary = NSDictionary()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -47,7 +49,7 @@ class MentionDetailViewController: UIViewController {
         
         GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))
         print("mention is",objOfMention.MentionId)
-        let str = "Agent/FullmentionDetail?MentionId="+objOfMention.MentionId
+        let str = "Agent/FullmentionDetail?MentionId="+String(objOfMention.MentionId)
         
         let request = NSMutableURLRequest(URL: NSURL(string: BASE_URL+str)!)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -64,9 +66,24 @@ class MentionDetailViewController: UIViewController {
                     if let object = object
                     {
                         print("response object",object)
-                       
+                        self.respone = object.valueForKey("Result") as! NSDictionary
+                        self.lblPrincipleName.text = NSString(format: "%@ %@", self.respone.valueForKey("P_FirstName") as! String,self.respone.valueForKey("P_LastName") as! String) as String
+                        self.principleEmail.text = self.respone.valueForKey("P_Email") as? String
+                        self.principleMobile.text = self.respone.valueForKey("P_Mobileno") as? String
+                        
+                        self.courtNAme.text = self.respone.valueForKey("CourtName") as? String
+                        self.Clientname.text = self.respone.valueForKey("ClientName") as? String
+                        let formatter : NSDateFormatter = NSDateFormatter()
+                        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+                        let dt = formatter.dateFromString((self.respone.valueForKey("Date") as? String)!)
+                        formatter.dateFormat = "dd/MM/yyyy"
+                        print(formatter.stringFromDate(dt!))
+                        self.mentionDate.text  = formatter.stringFromDate(dt!)
+                        
+                        self.courtAdd1.text = self.respone.valueForKey("Address1") as? String
+                        self.courtAdd2.text = self.respone.valueForKey("Address2") as? String
+                        self.Description.text = self.respone.valueForKey("Note") as? String
                     }
-                    
                 }
                 else
                 {
