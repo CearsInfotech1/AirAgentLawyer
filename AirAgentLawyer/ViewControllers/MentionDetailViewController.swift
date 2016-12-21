@@ -93,6 +93,7 @@ class MentionDetailViewController: UIViewController {
                         self.courtAdd2.text = self.respone.valueForKey("Address2") as? String
                         self.Description.text = self.respone.valueForKey("Note") as? String
                         
+                        
 //                        let descVal : String = (self.respone.valueForKey("Note") as? String)!
 //                        let sizeHeight = descVal.heightWithConstrainedWidth(self.view.frame.size.width, font: UIFont.systemFontOfSize(16.0))
 //                        print("label heih",sizeHeight)
