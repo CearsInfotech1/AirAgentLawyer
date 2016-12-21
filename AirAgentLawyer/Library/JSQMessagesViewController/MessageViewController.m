@@ -66,8 +66,6 @@
     [df setDateFormat:@"yyyy-MM-dd HH:mm"];
     [df setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     
-//    NSDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserData"];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTable:) name:@"chatViewReload" object:nil];
 
     avatars = [NSMutableDictionary dictionary];
@@ -75,14 +73,6 @@
     
     items = [NSMutableArray array];
     messages = [NSMutableArray array];
-    
-//    userDict = [NSMutableDictionary dictionary];
-//    receiverDict = [NSMutableDictionary dictionary];
-//    
-//    userDict[@"userid"] = @"1001";
-//    userDict[@"contactname"] = @"Jinal";
-//    
-//    receiverDict[@"contactname"] = @"Demouser";
     
     self.senderId = userDict[@"userid"];
     self.senderDisplayName = userDict[@"contactname"];
@@ -192,11 +182,18 @@
 
                             [items addObject:@{@"fromId": [dict[@"FromId"] stringValue], @"name": @"", @"status": @"", @"text": dict[@"Message"], @"type": @"text", @"image": @"", @"profilePic" : dict[@"UserProfilephoto"]}];
                             
+                            [df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];
+//                            [df setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+
+//                            [df setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+//                            [df setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+                            
+                            NSLog(@"date11 : %@", [df dateFromString:dict[@"ondate"]]);
+                            
                             JSQMessage *msg1 = [[JSQMessage alloc] initWithSenderId:[dict[@"FromId"] stringValue] senderDisplayName:@"" date:[df dateFromString:dict[@"ondate"]] text:dict[@"Message"]];
                             [messages addObject:msg1];
                         }
 
-                        //[self delayedReload];
                         self.automaticallyScrollsToMostRecentMessage = YES;
                         [self finishReceivingMessage];
                     }
@@ -204,114 +201,12 @@
                         self.automaticallyScrollsToMostRecentMessage = YES;
                         [self finishReceivingMessage];
                     }
-                    
-//                    {
-//                        AdminProfilephoto = "http://airagentapp.com.au/Content/lib/img/users/no-image.png";
-//                        FromId = 34;
-//                        IsRead = 0;
-//                        MentionId = 23;
-//                        Message = three;
-//                        Toid = 1;
-//                        UserProfilephoto = "http://airagentapp.com.au/Content/ProfilePhoto/72cbbc56-c8a9-40be-91e7-a742cadb7af1_aaa.jpg";
-//                        id = 169;
-//                        ondate = "2016-11-22T11:46:16.52";
-//                    },
-//                    {
-//                        AdminProfilephoto = "http://airagentapp.com.au/Content/lib/img/users/no-image.png";
-//                        FromId = 34;
-//                        IsRead = 0;
-//                        MentionId = 23;
-//                        Message = "hey!!!!";
-//                        Toid = 1;
-//                        UserProfilephoto = "http://airagentapp.com.au/Content/ProfilePhoto/72cbbc56-c8a9-40be-91e7-a742cadb7af1_aaa.jpg";
-//                        id = 199;
-//                        ondate = "2016-12-19T11:15:20.98";
-//                    }
                 }
             }
         });
     }];
     
 }
-
-//-(void) getMessageMethod {
-//
-//    if ([AppUtilities isConnectedToNetwork]) {
-//
-//        [AppUtilities showLoader];
-//
-//        NSString *param = [NSString stringWithFormat:@"method=getconversation&fromId=%@&toId=%@&itemid=%@", userDict[@"userid"], receiverDict[@"toId"], strItemID];
-//        
-//        [AppUtilities post:param completion:^(BOOL success, id  _Nullable object) {
-//            
-//            [AppUtilities hideLoader];
-//            
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [AppUtilities hideLoader];
-//            });
-//            
-//            if (success) {
-//                
-////                NSDictionary *responseDic = (NSDictionary *) object;
-//                NSDictionary *responseDic = (NSDictionary *)object;
-//                if ([responseDic count] > 0) {
-//                    
-//                    if ((responseDic[@"success"] != nil) && ([responseDic[@"success"] integerValue] == 1)) {
-//                        
-//                        NSLog(@"response : %@", responseDic);
-//                        
-//                        dispatch_async(dispatch_get_main_queue(), ^{
-//                            if ([responseDic[@"data"] count] > 0) {
-//                                
-//                                NSMutableArray *arrTemp = [[NSMutableArray alloc] initWithArray:responseDic[@"data"]];
-//                                NSMutableArray *arr = [[NSMutableArray alloc] initWithArray:[[CommonClass sharedInstance] arrayByReplacingNullsWithString:arrTemp]];
-//                                
-//                                for (NSDictionary *dict in arr) {
-//                                
-//                                    if ([dict[@"attachment"] isEqualToString:@""]) {
-//                                        [items addObject:@{@"fromId": dict[@"fromId"], @"name": dict[@"contactname"], @"status": @"", @"text": dict[@"message"], @"type": @"text", @"image": @"", @"profilePic" : dict[@"profilepic"]}];
-//                                        
-//                                        JSQMessage *msg1 = [[JSQMessage alloc] initWithSenderId:dict[@"fromId"] senderDisplayName:dict[@"contactname"] date:[df dateFromString:dict[@"created"]] text:dict[@"message"]];
-//                                        [messages addObject:msg1];
-//                                    }
-//                                    else
-//                                    {
-//                                        
-//                                        [items addObject:@{@"fromId": dict[@"fromId"], @"name": dict[@"contactname"], @"status": @"", @"text": dict[@"message"], @"type": @"picture", @"image": dict[@"attachment"], @"profilePic" : dict[@"profilepic"]}];
-//                                        
-//                                        [messages addObject:[self createPictureMessage:dict]];
-//                                    }
-//                                }
-//                                
-//                                //[self delayedReload];
-//                                self.automaticallyScrollsToMostRecentMessage = YES;
-//                                [self finishReceivingMessage];
-//                            }
-//                            else {
-//                                self.automaticallyScrollsToMostRecentMessage = YES;
-//                                [self finishReceivingMessage];
-//                            }
-//                        });
-//                        
-////                        [self delayedReload];
-//                        
-//                        
-//                    }
-//                    else {
-//                        [AppUtilities showAlert:@"Oglae" msg:responseDic[@"message"]];
-//                    }
-//                }
-//                else {
-//                    [AppUtilities showAlert:@"Oglae" msg:@"Problem occurred while processing your request."];
-//                }
-//                
-//            }
-//            else {
-//                [AppUtilities showAlert:@"Oglae" msg:@"Problem occurred while processing your request."];
-//            }
-//        }];
-//    }
-//}
 
 
 -(void) updateChat {
@@ -372,11 +267,8 @@
 - (void)loadAvatar:(NSDictionary *)item
 {
     if (started[item[@"fromId"]] == nil) started[item[@"fromId"]] = @YES; else return;
-//    if ([item[@"fromId"] isEqualToString:self.senderId])
-//    {
         [self downloadThumbnail:item];
         return;
-//    }
 }
 
 - (void)downloadThumbnail:(NSDictionary *)item
@@ -392,7 +284,6 @@
                 if ([data1 length] > 0) {
                     
                     UIImage *image = [UIImage imageWithData:data1];
-                    //NSLog(@"image : %@", image);
                     avatars[item[@"fromId"]] = [JSQMessagesAvatarImageFactory avatarImageWithImage:image diameter:30.0];
                     [self performSelector:@selector(delayedReload) withObject:nil afterDelay:0.1];
                 }
@@ -519,27 +410,86 @@
     return newImage;
 }
 
-//-(void)didPressAccessoryButton:(UIButton *)sender {
-//    
-//    [[self view] endEditing:YES];
-//    if (!IsPopUpVisible) {
-//        self.visiblePopup = [[ADPopupView alloc] initAtPoint:CGPointMake(25.0, [UIScreen mainScreen].bounds.size.height - 45) delegate:self withContentView:[self contentView]];
-//        [self.visiblePopup showInView:self.view animated:YES];
-//        IsPopUpVisible = YES;
-//    }
-//    else
-//    {
-//        IsPopUpVisible = NO;
-//        [self.visiblePopup hide:YES];
-//    }
+-(void) sendMessageMethod: (NSString *) msgTxt {
+    
+//    [[GlobalClass sharedInstance] startIndicator:NSLocalizedString(@"Loading...", @"comment")];
+    
+    NSMutableDictionary *paramDic = [NSMutableDictionary dictionary];
+    paramDic[@"Fromid"] = userDict[@"userid"];
+    paramDic[@"Message"] = msgTxt;
+    paramDic[@"MentionId"] = receiverDict[@"toId"];
+    
+    NSData *data1 = [NSJSONSerialization dataWithJSONObject:paramDic options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *jsonStr = [[NSString alloc] initWithData:data1 encoding:NSUTF8StringEncoding];
+    
+    NSString *BASE_URL = @"http://api.airagentapp.com.au/Api";
+    
+    NSString *apiurl = [NSString stringWithFormat:@"%@/Profile/AddChathistory", BASE_URL];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:apiurl]];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request addValue:userDict[@"token"] forHTTPHeaderField:@"Token"];
+    [request addValue:userDict[@"userid"] forHTTPHeaderField:@"UserId"];
+    
+     [[GlobalClass sharedInstance] post:request params:jsonStr completion:^(BOOL success, id  _Nullable object) {
+        
+         [[GlobalClass sharedInstance] stopIndicator];
+         
+         if (success) {
+            
+             if (object != nil) {
+                 NSLog(@"object : %@", object);
+             }
+         }
+     }];
+}
+
+//GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))
+//
+//let paramDic : NSMutableDictionary = NSMutableDictionary()
+//paramDic.setValue(self.agentID, forKey: "UserId")
+//paramDic.setValue(self.txtOldPass.text!, forKey: "OldPassword")
+//paramDic.setValue(self.txtNewPass.text!, forKey: "NewPassword")
+//let jsonData = try! NSJSONSerialization.dataWithJSONObject(paramDic, options: NSJSONWritingOptions())
+//let jsonString = NSString(data: jsonData, encoding: NSUTF8StringEncoding) as! String
+//print("json string",jsonString)
+//
+//
+////API Calling
+//
+//let request = NSMutableURLRequest(URL: NSURL(string: BASE_URL+"Profile/ChangePassword")!)
+//print("request",request)
+//request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//request.addValue(self.Token, forHTTPHeaderField: "Token")
+//request.addValue(self.agentID, forHTTPHeaderField: "UserId")
+//
+//GlobalClass.sharedInstance.post(request, params: jsonString) { (success, object) in
+//    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+//        print("obj",object)
+//        GlobalClass.sharedInstance.stopIndicator()
+//        if success
+//        {
+//            GlobalClass.sharedInstance.stopIndicator()
+//            
+//            if let object = object
+//            {
+//                print("response object",object)
+//                if(object.valueForKey("IsSuccess") as! Bool == true)
+//                {
+//                    GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("Password Change Successfully", comment: "comm"))
+//                    self.navigationController?.popViewControllerAnimated(true)
+//                }
+//            }
+//        }
+//    })
 //}
 
 //-(void) sendMessageMethod:(NSString *)msg {
-//    
+//
 //    if ([AppUtilities isConnectedToNetwork]) {
-//        
+//
 ////        [AppUtilities showLoader];
-//        
+//
 //        NSMutableDictionary *dictParam = [[NSMutableDictionary alloc] init];
 //        [dictParam setValue:[NSString stringWithFormat:@"%@",userDict[@"userid"]] forKey:@"fromId"];
 //        [dictParam setValue:[NSString stringWithFormat:@"%@",receiverDict[@"toId"]] forKey:@"toId"];
@@ -682,7 +632,7 @@
     item[@"text"] = msgTxt;
     item[@"type"] = @"text";
     
-//    [self sendMessageMethod:msgTxt];
+    [self sendMessageMethod:msgTxt];
     
     return item;
 }
@@ -809,7 +759,7 @@ NSString* Date2String(NSDate *date)
     JSQMessagesCollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     cell.textView.textColor = color;
     cell.textView.backgroundColor = backcolor;
-    cell.textView.layer.cornerRadius = 2.0f;
+    cell.textView.layer.cornerRadius = 5.0f;
     cell.textView.linkTextAttributes = @{NSForegroundColorAttributeName:color};
     
     return cell;

@@ -66,7 +66,6 @@ class MentionDetailViewController: UIViewController {
                         print("response object",object)
                        
                     }
-                    
                 }
                 else
                 {
