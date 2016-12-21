@@ -108,6 +108,14 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.navigationController?.pushViewController(mentionDetailVC, animated: true)
     }
     
+    //MARK: Outcome clicked
+    @IBAction func btnOutcomeClick(sender : UIButton)
+    {
+        let mentionDetailVC = self.storyboard?.instantiateViewControllerWithIdentifier("MentionDetailViewController") as! MentionDetailViewController
+        mentionDetailVC.objOfMention = self.obj
+        self.navigationController?.pushViewController(mentionDetailVC, animated: true)
+    }
+    
     //MARK: Chat clicked
     @IBAction func btnChatClick(sender : UIButton)
     {
