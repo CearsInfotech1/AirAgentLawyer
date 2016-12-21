@@ -9,13 +9,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AirAgentLawyer/ViewControllers/SignupViewController.swift"
-            timestampString = "501679939.586138"
+            filePath = "AirAgentLawyer/Library/JSQMessagesViewController/MessageViewController.m"
+            timestampString = "503996281.668419"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "willTextFieldBeginEditing(_:)"
+            startingLineNumber = "438"
+            endingLineNumber = "438"
+            landmarkName = "-sendMessageMethod:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AirAgentLawyer/Library/JSQMessagesViewController/MessageViewController.m"
+            timestampString = "503996281.668419"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "434"
+            endingLineNumber = "434"
+            landmarkName = "-sendMessageMethod:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
