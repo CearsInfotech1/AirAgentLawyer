@@ -17,6 +17,6 @@ class MentionRequest: NSObject {
     var CourtName = ""
     var MentionDate = ""
     var MentionId : Int!
-    var Principleid = ""
+    var Principleid : Int!
     var Status : Int!
 }

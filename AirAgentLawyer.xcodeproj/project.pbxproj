@@ -536,6 +536,7 @@
 		18F024471DE4164F005FC57F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				1846AD8F1E0A72520051FB47 /* SLPopupViewController */,
 				84CE97C61E0A872100A6BFAA /* SBPicker */,
 				180147A01E0A6E6C00C99D16 /* JSQMessagesViewController */,
 				84C0CDB81E03C9AD00078FEA /* SDWebImages */,

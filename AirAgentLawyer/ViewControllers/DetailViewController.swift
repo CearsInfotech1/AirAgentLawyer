@@ -14,6 +14,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var obj : MentionRequest = MentionRequest()
     var statusType : Int!
     
+    var userDict: NSDictionary = NSDictionary()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,6 +24,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tblDetail.tableFooterView = UIView(frame: CGRect.zero)
         print("object",obj)
         self.statusType = obj.Status
+        let user_Data = NSUserDefaults.standardUserDefaults().objectForKey("USER_OBJECT") as? NSData
+        
+        if let userData = user_Data {
+            let userObj = NSKeyedUnarchiver.unarchiveObjectWithData(userData)
+            
+            if let userData_val = userObj {
+                
+                print("userobject : ", userData_val)
+                userDict = userData_val as! NSDictionary
+            }
+        }
         self.tblDetail.reloadData()
     }
     
