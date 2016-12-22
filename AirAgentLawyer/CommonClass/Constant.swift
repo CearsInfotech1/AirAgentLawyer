@@ -43,6 +43,8 @@ let HomeViewIdentifier = "HomeViewController"
 let DetailViewIdentifier = "DetailViewController"
 let ScheduleViewIdentifier = "AddScheduleViewController"
 let MyScheduleIdentifier = "MyScheduleViewController"
+let PopupViewIdentifier = "PopupViewController"
+let ChatListViewIdentifier = "ChatListViewController"
 
 //
 //
