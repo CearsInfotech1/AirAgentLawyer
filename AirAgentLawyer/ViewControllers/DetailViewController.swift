@@ -12,7 +12,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet var tblDetail: UITableView!
     var obj : MentionRequest = MentionRequest()
-    var statusType : String = ""
+    var statusType : Int!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,6 +22,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tblDetail.tableFooterView = UIView(frame: CGRect.zero)
         print("object",obj)
         self.statusType = obj.Status
+        self.tblDetail.reloadData()
     }
     
     @IBAction func clkBack(sender: UIButton) {
@@ -38,25 +40,46 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return 4
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row == 0 {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
+
+        if indexPath.row == 0
+        {
             return 91
         }
-        else if indexPath.row == 1 {
+        else if indexPath.row == 1
+        {
             return 105
         }
         else if(indexPath.row == 2)
-        {
-            if(self.statusType == "1")
+        {   if(self.statusType != nil)
             {
-                return 61
-            }
-            else
-            {
-                return 0
+                if(self.statusType == 1)
+                {
+                    return 61
+                }
+                else
+                {
+                    return 0
+                }
             }
         }
-        return 115
+        else
+        {
+            if(self.statusType != nil)
+            {
+                if(self.statusType == 1)
+                {
+                    return 0
+                }
+                else
+                {
+                    return 115
+                }
+            }
+            
+        }
+        return 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

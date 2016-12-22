@@ -724,7 +724,8 @@ NSInteger GlobalIndexSectionEnd = 0;
     {
         NSLog(@"match found");
 
-        cell.dateLabel.backgroundColor = [UIColor colorWithRed:56.0/255.0f green:194.0/255.0f blue:29.0/255.0f alpha:1.0];
+        cell.dateLabel.backgroundColor = [UIColor colorWithRed:0.0/255.0f green:178.0/255.0f blue:244.0/255.0f alpha:1.0];
+        cell.dateLabel.textColor = [UIColor colorWithWhite:255.0/255.0f alpha:1.0];
         cell.dateLabel.layer.cornerRadius = cell.dateLabel.frame.size.height / 2;
         cell.dateLabel.layer.masksToBounds = YES;
         

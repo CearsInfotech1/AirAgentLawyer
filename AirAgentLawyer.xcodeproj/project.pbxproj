@@ -101,6 +101,9 @@
 		84C0CDE71E03C9C900078FEA /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C0CDD51E03C9C900078FEA /* UIImageView+HighlightedWebCache.m */; };
 		84C0CDE81E03C9C900078FEA /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C0CDD71E03C9C900078FEA /* UIImageView+WebCache.m */; };
 		84C0CDE91E03C9C900078FEA /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C0CDD91E03C9C900078FEA /* UIView+WebCacheOperation.m */; };
+		84CE97C51E0A765E00A6BFAA /* DataSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CE97C41E0A765E00A6BFAA /* DataSchedule.swift */; };
+		84CE97CA1E0A875000A6BFAA /* SBPickerSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CE97C81E0A875000A6BFAA /* SBPickerSelector.m */; };
+		84CE97CB1E0A875000A6BFAA /* SBPickerSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84CE97C91E0A875000A6BFAA /* SBPickerSelector.xib */; };
 		84E33C841E08E03E00501291 /* MentionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E33C831E08E03E00501291 /* MentionDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -279,6 +282,10 @@
 		84C0CDD71E03C9C900078FEA /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		84C0CDD81E03C9C900078FEA /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		84C0CDD91E03C9C900078FEA /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		84CE97C41E0A765E00A6BFAA /* DataSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSchedule.swift; sourceTree = "<group>"; };
+		84CE97C71E0A875000A6BFAA /* SBPickerSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBPickerSelector.h; sourceTree = "<group>"; };
+		84CE97C81E0A875000A6BFAA /* SBPickerSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBPickerSelector.m; sourceTree = "<group>"; };
+		84CE97C91E0A875000A6BFAA /* SBPickerSelector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBPickerSelector.xib; sourceTree = "<group>"; };
 		84E33C831E08E03E00501291 /* MentionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -510,6 +517,7 @@
 		18F024471DE4164F005FC57F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				84CE97C61E0A872100A6BFAA /* SBPicker */,
 				180147A01E0A6E6C00C99D16 /* JSQMessagesViewController */,
 				84C0CDB81E03C9AD00078FEA /* SDWebImages */,
 				2BF0B4A61DE9595E00512899 /* RSDFlowLayout */,
@@ -566,6 +574,7 @@
 			isa = PBXGroup;
 			children = (
 				848FEB371E07B25000945222 /* MentionRequest.swift */,
+				84CE97C41E0A765E00A6BFAA /* DataSchedule.swift */,
 			);
 			name = Modal;
 			sourceTree = "<group>";
@@ -617,6 +626,16 @@
 				84C0CDD91E03C9C900078FEA /* UIView+WebCacheOperation.m */,
 			);
 			name = SDWebImages;
+			sourceTree = "<group>";
+		};
+		84CE97C61E0A872100A6BFAA /* SBPicker */ = {
+			isa = PBXGroup;
+			children = (
+				84CE97C71E0A875000A6BFAA /* SBPickerSelector.h */,
+				84CE97C81E0A875000A6BFAA /* SBPickerSelector.m */,
+				84CE97C91E0A875000A6BFAA /* SBPickerSelector.xib */,
+			);
+			name = SBPicker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -683,6 +702,7 @@
 				18F0243F1DE4144E005FC57F /* LaunchScreen.storyboard in Resources */,
 				180148071E0A6E6D00C99D16 /* JSQMessagesAssets.bundle in Resources */,
 				18ADC9BF1DE5A23200A005E6 /* Images.xcassets in Resources */,
+				84CE97CB1E0A875000A6BFAA /* SBPickerSelector.xib in Resources */,
 				180148351E0A6E6D00C99D16 /* JSQMessagesTypingIndicatorFooterView.xib in Resources */,
 				180148111E0A6E6D00C99D16 /* JSQMessagesViewController.xib in Resources */,
 				18F0243C1DE4144E005FC57F /* Assets.xcassets in Resources */,
@@ -760,6 +780,7 @@
 				1801482F1E0A6E6D00C99D16 /* JSQMessagesLoadEarlierHeaderView.m in Sources */,
 				18F0244E1DE416DB005FC57F /* SwiftLoader.swift in Sources */,
 				180148201E0A6E6D00C99D16 /* JSQMessagesAvatarImage.m in Sources */,
+				84CE97CA1E0A875000A6BFAA /* SBPickerSelector.m in Sources */,
 				180148081E0A6E6D00C99D16 /* JSQSystemSoundPlayer+JSQMessages.m in Sources */,
 				18F0244C1DE416B5005FC57F /* GlobalClass.swift in Sources */,
 				84E33C841E08E03E00501291 /* MentionDetailViewController.swift in Sources */,
@@ -769,6 +790,7 @@
 				180148171E0A6E6D00C99D16 /* JSQSystemSoundPlayer.m in Sources */,
 				18951FEC1DE6BB4200017A0F /* HomeViewController.swift in Sources */,
 				1895200D1DE6FD9A00017A0F /* TPKeyboardAvoidingScrollView.m in Sources */,
+				84CE97C51E0A765E00A6BFAA /* DataSchedule.swift in Sources */,
 				180148311E0A6E6D00C99D16 /* JSQMessagesMediaPlaceholderView.m in Sources */,
 				1801480A1E0A6E6D00C99D16 /* NSString+JSQMessages.m in Sources */,
 				18F024501DE41738005FC57F /* Constant.swift in Sources */,

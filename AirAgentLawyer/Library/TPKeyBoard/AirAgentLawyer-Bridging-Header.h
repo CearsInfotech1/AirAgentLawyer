@@ -15,3 +15,4 @@
 #import "JSQMessagesAvatarImageFactory.h"
 
 #import "MessageViewController.h"
+#import "SBPickerSelector.h"

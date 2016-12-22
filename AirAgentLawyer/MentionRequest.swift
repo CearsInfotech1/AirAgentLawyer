@@ -18,5 +18,5 @@ class MentionRequest: NSObject {
     var MentionDate = ""
     var MentionId : Int!
     var Principleid = ""
-    var Status = ""
+    var Status : Int!
 }
