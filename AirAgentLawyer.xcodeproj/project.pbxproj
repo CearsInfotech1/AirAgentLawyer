@@ -54,6 +54,10 @@
 		180148331E0A6E6D00C99D16 /* JSQMessagesToolbarContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180148031E0A6E6D00C99D16 /* JSQMessagesToolbarContentView.xib */; };
 		180148341E0A6E6D00C99D16 /* JSQMessagesTypingIndicatorFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180148051E0A6E6D00C99D16 /* JSQMessagesTypingIndicatorFooterView.m */; };
 		180148351E0A6E6D00C99D16 /* JSQMessagesTypingIndicatorFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180148061E0A6E6D00C99D16 /* JSQMessagesTypingIndicatorFooterView.xib */; };
+		18162D941E0A91E000D9DAE2 /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18162D931E0A91E000D9DAE2 /* ChatListViewController.swift */; };
+		18162D971E0A959800D9DAE2 /* CommonClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 18162D961E0A959800D9DAE2 /* CommonClass.m */; };
+		1846AD8E1E0A71AD0051FB47 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1846AD8D1E0A71AD0051FB47 /* PopupViewController.swift */; };
+		1846AD911E0A72520051FB47 /* UIVViewController-SLPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1846AD901E0A72520051FB47 /* UIVViewController-SLPopup.swift */; };
 		18951FEC1DE6BB4200017A0F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18951FEB1DE6BB4200017A0F /* HomeViewController.swift */; };
 		18951FEE1DE6BE8100017A0F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18951FED1DE6BE8100017A0F /* DetailViewController.swift */; };
 		18951FF91DE6E5F400017A0F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18951FF71DE6E5F400017A0F /* BaseViewController.swift */; };
@@ -200,6 +204,11 @@
 		180148041E0A6E6D00C99D16 /* JSQMessagesTypingIndicatorFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesTypingIndicatorFooterView.h; sourceTree = "<group>"; };
 		180148051E0A6E6D00C99D16 /* JSQMessagesTypingIndicatorFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesTypingIndicatorFooterView.m; sourceTree = "<group>"; };
 		180148061E0A6E6D00C99D16 /* JSQMessagesTypingIndicatorFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JSQMessagesTypingIndicatorFooterView.xib; sourceTree = "<group>"; };
+		18162D931E0A91E000D9DAE2 /* ChatListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
+		18162D951E0A959800D9DAE2 /* CommonClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonClass.h; sourceTree = "<group>"; };
+		18162D961E0A959800D9DAE2 /* CommonClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonClass.m; sourceTree = "<group>"; };
+		1846AD8D1E0A71AD0051FB47 /* PopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
+		1846AD901E0A72520051FB47 /* UIVViewController-SLPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIVViewController-SLPopup.swift"; sourceTree = "<group>"; };
 		18951FEB1DE6BB4200017A0F /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		18951FED1DE6BE8100017A0F /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		18951FF71DE6E5F400017A0F /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -451,6 +460,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		1846AD8F1E0A72520051FB47 /* SLPopupViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1846AD901E0A72520051FB47 /* UIVViewController-SLPopup.swift */,
+			);
+			path = SLPopupViewController;
+			sourceTree = "<group>";
+		};
 		189520011DE6F38400017A0F /* TPKeyBoard */ = {
 			isa = PBXGroup;
 			children = (
@@ -503,6 +520,8 @@
 			children = (
 				18F0244F1DE41738005FC57F /* Constant.swift */,
 				18F0244B1DE416B5005FC57F /* GlobalClass.swift */,
+				18162D951E0A959800D9DAE2 /* CommonClass.h */,
+				18162D961E0A959800D9DAE2 /* CommonClass.m */,
 			);
 			path = CommonClass;
 			sourceTree = "<group>";
@@ -510,6 +529,7 @@
 		18F024471DE4164F005FC57F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				1846AD8F1E0A72520051FB47 /* SLPopupViewController */,
 				180147A01E0A6E6C00C99D16 /* JSQMessagesViewController */,
 				84C0CDB81E03C9AD00078FEA /* SDWebImages */,
 				2BF0B4A61DE9595E00512899 /* RSDFlowLayout */,
@@ -533,6 +553,8 @@
 				2BF0B4C51DE95D3000512899 /* MyScheduleViewController.swift */,
 				84C0CDB41E03BE9500078FEA /* ChangePasswordViewController.swift */,
 				84E33C831E08E03E00501291 /* MentionDetailViewController.swift */,
+				1846AD8D1E0A71AD0051FB47 /* PopupViewController.swift */,
+				18162D931E0A91E000D9DAE2 /* ChatListViewController.swift */,
 			);
 			name = Controller;
 			path = ViewControllers;
@@ -726,11 +748,13 @@
 				180148161E0A6E6D00C99D16 /* JSQMessagesToolbarButtonFactory.m in Sources */,
 				1895200E1DE6FD9A00017A0F /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				84C0CDE91E03C9C900078FEA /* UIView+WebCacheOperation.m in Sources */,
+				1846AD8E1E0A71AD0051FB47 /* PopupViewController.swift in Sources */,
 				180148091E0A6E6D00C99D16 /* NSBundle+JSQMessages.m in Sources */,
 				2BF0B4BE1DE959B700512899 /* RSDFDatePickerView.m in Sources */,
 				84C0CDB51E03BE9500078FEA /* ChangePasswordViewController.swift in Sources */,
 				180148221E0A6E6D00C99D16 /* JSQPhotoMediaItem.m in Sources */,
 				84C0CDE81E03C9C900078FEA /* UIImageView+WebCache.m in Sources */,
+				18162D941E0A91E000D9DAE2 /* ChatListViewController.swift in Sources */,
 				84C0CDE61E03C9C900078FEA /* UIImage+WebP.m in Sources */,
 				1801480D1E0A6E6D00C99D16 /* UIImage+JSQMessages.m in Sources */,
 				180148141E0A6E6D00C99D16 /* JSQMessagesMediaViewBubbleImageMasker.m in Sources */,
@@ -740,6 +764,7 @@
 				84C0CDDC1E03C9C900078FEA /* SDImageCache.m in Sources */,
 				1801480C1E0A6E6D00C99D16 /* UIDevice+JSQMessages.m in Sources */,
 				2BF0B4C31DE95B3E00512899 /* AddScheduleViewController.swift in Sources */,
+				18162D971E0A959800D9DAE2 /* CommonClass.m in Sources */,
 				1801482D1E0A6E6D00C99D16 /* JSQMessagesInputToolbar.m in Sources */,
 				84C0CDE51E03C9C900078FEA /* UIImage+MultiFormat.m in Sources */,
 				84C0CDE01E03C9C900078FEA /* SDWebImageDownloaderOperation.m in Sources */,
@@ -783,6 +808,7 @@
 				1801482A1E0A6E6D00C99D16 /* JSQMessagesCollectionViewCellOutgoing.m in Sources */,
 				848FEB381E07B25000945222 /* MentionRequest.swift in Sources */,
 				180148151E0A6E6D00C99D16 /* JSQMessagesTimestampFormatter.m in Sources */,
+				1846AD911E0A72520051FB47 /* UIVViewController-SLPopup.swift in Sources */,
 				180148121E0A6E6D00C99D16 /* JSQMessagesAvatarImageFactory.m in Sources */,
 				18951FEE1DE6BE8100017A0F /* DetailViewController.swift in Sources */,
 			);

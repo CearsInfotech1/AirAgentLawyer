@@ -13,6 +13,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet var tblDetail: UITableView!
     var obj : MentionRequest = MentionRequest()
     var statusType : String = ""
+    
+    var userDict: NSDictionary = NSDictionary()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,6 +24,18 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tblDetail.tableFooterView = UIView(frame: CGRect.zero)
         print("object",obj)
         self.statusType = obj.Status
+        
+        let user_Data = NSUserDefaults.standardUserDefaults().objectForKey("USER_OBJECT") as? NSData
+        
+        if let userData = user_Data {
+            let userObj = NSKeyedUnarchiver.unarchiveObjectWithData(userData)
+            
+            if let userData_val = userObj {
+                
+                print("userobject : ", userData_val)
+                userDict = userData_val as! NSDictionary
+            }
+        }
     }
     
     @IBAction func clkBack(sender: UIButton) {
@@ -111,32 +126,97 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //MARK: Outcome clicked
     @IBAction func btnOutcomeClick(sender : UIButton)
     {
-        let mentionDetailVC = self.storyboard?.instantiateViewControllerWithIdentifier("MentionDetailViewController") as! MentionDetailViewController
-        mentionDetailVC.objOfMention = self.obj
-        self.navigationController?.pushViewController(mentionDetailVC, animated: true)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DetailViewController.didPopUpClose), name: "didPopupClose", object: nil)
+        
+        let popupView: PopupViewController = self.storyboard?.instantiateViewControllerWithIdentifier(PopupViewIdentifier) as! PopupViewController
+        popupView.objData = obj
+        self.navigationController?.presentpopupViewController(popupView, animationType: SLpopupViewAnimationType.Fade, completion: { 
+        })
     }
     
     //MARK: Chat clicked
     @IBAction func btnChatClick(sender : UIButton)
     {
         let messageView: MessageViewController = MessageViewController()
-        messageView.receiverDict = NSMutableDictionary(dictionary: ["contactname":obj.ClientName,"toId": obj.MentionId])
-        
-        let user_Data = NSUserDefaults.standardUserDefaults().objectForKey("USER_OBJECT") as? NSData
-        
-        if let userData = user_Data {
-            let userObj = NSKeyedUnarchiver.unarchiveObjectWithData(userData)
-            
-            if let userData_val = userObj {
-                
-                print("userobject : ", userData_val)
-                messageView.userDict = NSMutableDictionary(dictionary: ["contactname":userData_val["Token"] as! String, "token":userData_val["Token"] as! String,"userid": String(userData_val["userid"] as! Int)])
-            }
-        }
-        
+        messageView.receiverDict = NSMutableDictionary(dictionary: ["contactname":obj.ClientName,"toId": String(obj.MentionId)])
+        messageView.userDict = NSMutableDictionary(dictionary: ["contactname":userDict["Token"] as! String, "token":userDict["Token"] as! String,"userid": String(userDict["userid"] as! Int)])
         self.navigationController?.pushViewController(messageView, animated: true)
     }
     
+    //MARK: Accept clicked
+    @IBAction func btnAcceptClick(sender : UIButton) {
+        self.acceptRequest()
+    }
+    
+    //MARK: Reject clicked
+    @IBAction func btnRejectClick(sender : UIButton) {
+        self.rejectRequest()
+    }
+    
+    func acceptRequest() {
+        
+        GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))
+        
+        let str = "Agent/AcceptRequest?Mentionid="+String(obj.MentionId)+"&AgentId="+String(userDict["userid"] as! Int)
+        let request = NSMutableURLRequest(URL: NSURL(string: BASE_URL+str)!)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(userDict["Token"] as! String, forHTTPHeaderField: "Token")
+        request.addValue(String(userDict["userid"] as! Int), forHTTPHeaderField: "UserId")
+        
+        GlobalClass.sharedInstance.get(request, params: "") { (success, object) in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                print("obj",object)
+                if success {
+                    GlobalClass.sharedInstance.stopIndicator()
+                    
+                    if let object = object {
+                        print("response object",object)
+                        if(object.valueForKey("IsSuccess") as! Bool == true) {
+                            GlobalClass.sharedInstance.showAlert(NSLocalizedString("Message", comment: "comm"), msg: NSLocalizedString("Accepted Successfully.", comment: "comm"))
+                        }
+                    }
+                }
+                else {
+                    GlobalClass.sharedInstance.stopIndicator()
+                }
+            })
+        }
+    }
+    
+    func rejectRequest() {
+        
+        GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))
+        
+        let str = "Agent/DeclainRequest?Mentionid="+String(obj.MentionId)+"&AgentId="+String(userDict["userid"] as! Int)
+        let request = NSMutableURLRequest(URL: NSURL(string: BASE_URL+str)!)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(userDict["Token"] as! String, forHTTPHeaderField: "Token")
+        request.addValue(String(userDict["userid"] as! Int), forHTTPHeaderField: "UserId")
+        
+        GlobalClass.sharedInstance.get(request, params: "") { (success, object) in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                print("obj",object)
+                if success {
+                    GlobalClass.sharedInstance.stopIndicator()
+                    
+                    if let object = object {
+                        print("response object",object)
+                        if(object.valueForKey("IsSuccess") as! Bool == true) {
+                            GlobalClass.sharedInstance.showAlert(NSLocalizedString("Message", comment: "comm"), msg: NSLocalizedString("Rejected Successfully.", comment: "comm"))
+                        }
+                    }
+                }
+                else {
+                    GlobalClass.sharedInstance.stopIndicator()
+                }
+            })
+        }
+    }
+    
+    //MARK: Popup obseve method
+    func didPopUpClose() {
+        self.navigationController?.dismissPopupViewController(SLpopupViewAnimationType.Fade)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

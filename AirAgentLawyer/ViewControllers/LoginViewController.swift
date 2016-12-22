@@ -46,9 +46,7 @@ class LoginViewController: UIViewController, TpKeyboardDelegate {
         let jsonString = NSString(data: jsonData, encoding: NSUTF8StringEncoding) as! String
         print("json string",jsonString)
         
-    
         //API Calling
-   
         let request = NSMutableURLRequest(URL: NSURL(string: BASE_URL+"Login/UserLogin")!)
         print("request",request)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -62,7 +60,6 @@ class LoginViewController: UIViewController, TpKeyboardDelegate {
                     
                     if let object = object
                     {
-                        print("response object",object)
                         if(object.valueForKey("IsSuccess") as! Bool == true)
                         {
                             let userData = NSKeyedArchiver.archivedDataWithRootObject((object.valueForKey("Result"))!)

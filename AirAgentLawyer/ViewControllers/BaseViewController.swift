@@ -135,8 +135,8 @@ extension BaseViewController: DetailViewControllerDelegate {
                     let Obj = self.storyboard?.instantiateViewControllerWithIdentifier(MyScheduleIdentifier) as! MyScheduleViewController
                     self.navigationController?.pushViewController(Obj, animated: false)
                 }
-                /*else if index == 2 {
-                    let Obj = self.storyboard?.instantiateViewControllerWithIdentifier("ProductViewController") as! ProductViewController
+                else if index == 2 {
+                    let Obj = self.storyboard?.instantiateViewControllerWithIdentifier(ChatListViewIdentifier) as! ChatListViewController
                     self.navigationController?.pushViewController(Obj, animated: false)
                 }
 //                else if index == 3 {

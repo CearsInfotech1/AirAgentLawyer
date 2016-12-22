@@ -39,6 +39,15 @@ class ChatSubmit : UITableViewCell
     @IBOutlet var btnSubmitOutCome : UIButton!
     
 }
+
+class ChatListCell : UITableViewCell
+{
+    @IBOutlet var imgCell: UIImageView!
+    @IBOutlet var lblDate: UILabel!
+    @IBOutlet var lblMsg : UILabel!
+    @IBOutlet var lblTitle : UILabel!
+}
+
 class GlobalClass: NSObject {
     
     var delegate :GlobalDelegate?
