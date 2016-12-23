@@ -68,6 +68,7 @@
 		1895200D1DE6FD9A00017A0F /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1895200A1DE6FD9A00017A0F /* TPKeyboardAvoidingScrollView.m */; };
 		1895200E1DE6FD9A00017A0F /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1895200C1DE6FD9A00017A0F /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		18ADC9BF1DE5A23200A005E6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18ADC9BE1DE5A23200A005E6 /* Images.xcassets */; };
+		18F014F91E0BB0F700A5D9B9 /* NSBundle+Language.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F014F81E0BB0F700A5D9B9 /* NSBundle+Language.m */; };
 		18F024321DE4144E005FC57F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F024311DE4144E005FC57F /* AppDelegate.swift */; };
 		18F024371DE4144E005FC57F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18F024351DE4144E005FC57F /* Main.storyboard */; };
 		18F0243A1DE4144E005FC57F /* AirAgentLawyer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18F024381DE4144E005FC57F /* AirAgentLawyer.xcdatamodeld */; };
@@ -229,6 +230,8 @@
 		1895200B1DE6FD9A00017A0F /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
 		1895200C1DE6FD9A00017A0F /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
 		18ADC9BE1DE5A23200A005E6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		18F014F71E0BB0F700A5D9B9 /* NSBundle+Language.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+Language.h"; sourceTree = "<group>"; };
+		18F014F81E0BB0F700A5D9B9 /* NSBundle+Language.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+Language.m"; sourceTree = "<group>"; };
 		18F0242E1DE4144E005FC57F /* AirAgentLawyer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirAgentLawyer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18F024311DE4144E005FC57F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18F024361DE4144E005FC57F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -544,6 +547,8 @@
 		18F024471DE4164F005FC57F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				18F014F71E0BB0F700A5D9B9 /* NSBundle+Language.h */,
+				18F014F81E0BB0F700A5D9B9 /* NSBundle+Language.m */,
 				1846AD8F1E0A72520051FB47 /* SLPopupViewController */,
 				84CE97C61E0A872100A6BFAA /* SBPicker */,
 				180147A01E0A6E6C00C99D16 /* JSQMessagesViewController */,
@@ -816,6 +821,7 @@
 				84C0CDDB1E03C9C900078FEA /* NSData+ImageContentType.m in Sources */,
 				1801482E1E0A6E6D00C99D16 /* JSQMessagesLabel.m in Sources */,
 				180148131E0A6E6D00C99D16 /* JSQMessagesBubbleImageFactory.m in Sources */,
+				18F014F91E0BB0F700A5D9B9 /* NSBundle+Language.m in Sources */,
 				1801481C1E0A6E6D00C99D16 /* MessageViewController.m in Sources */,
 				1801482F1E0A6E6D00C99D16 /* JSQMessagesLoadEarlierHeaderView.m in Sources */,
 				18F0244E1DE416DB005FC57F /* SwiftLoader.swift in Sources */,
@@ -879,6 +885,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -932,6 +939,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";

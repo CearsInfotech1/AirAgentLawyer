@@ -176,8 +176,8 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                             print("no data availabel")
                             self.tblHome.reloadData()
                         }
-                        
                     }
+                    self.tblHome.reloadData()
                 }
                 else
                 {

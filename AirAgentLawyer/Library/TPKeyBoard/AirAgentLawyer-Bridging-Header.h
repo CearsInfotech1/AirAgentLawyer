@@ -18,3 +18,5 @@
 
 #import "CommonClass.h"
 #import "SBPickerSelector.h"
+
+#import "NSBundle+Language.h"

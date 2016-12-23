@@ -29,6 +29,8 @@ class MentionDetailViewController: UIViewController {
     @IBOutlet var Description : UILabel!
     @IBOutlet var descView : UIView!
     
+    @IBOutlet var scrollView: UIScrollView!
+    
     var objOfMention : MentionRequest = MentionRequest()
     var principleObj : PostProjectRequest = PostProjectRequest()
     

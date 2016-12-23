@@ -23,6 +23,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tblDetail.delegate = self
         tblDetail.dataSource = self
         tblDetail.tableFooterView = UIView(frame: CGRect.zero)
+        tblDetail.scrollEnabled = false
+        
         print("object",obj)
         self.statusType = obj.Status
         let user_Data = NSUserDefaults.standardUserDefaults().objectForKey("USER_OBJECT") as? NSData
@@ -82,13 +84,13 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         {
             if(self.statusType != nil)
             {
-                if(self.statusType == 1)
+                if(self.statusType == 3)
                 {
-                    return 0
+                    return 115
                 }
                 else
                 {
-                    return 115
+                    return 0
                 }
             }
             
@@ -194,6 +196,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     if let object = object {
                         print("response object",object)
                         if(object.valueForKey("IsSuccess") as! Bool == true) {
+                            self.statusType = 2
+                            self.tblDetail.reloadData()
                             GlobalClass.sharedInstance.showAlert(NSLocalizedString("Message", comment: "comm"), msg: NSLocalizedString("Accepted Successfully.", comment: "comm"))
                         }
                     }
@@ -224,6 +228,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     if let object = object {
                         print("response object",object)
                         if(object.valueForKey("IsSuccess") as! Bool == true) {
+                            self.statusType = 2
+                            self.tblDetail.reloadData()
                             GlobalClass.sharedInstance.showAlert(NSLocalizedString("Message", comment: "comm"), msg: NSLocalizedString("Rejected Successfully.", comment: "comm"))
                         }
                     }
