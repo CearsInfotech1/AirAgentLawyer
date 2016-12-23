@@ -32,9 +32,13 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                 self.Token = userData_val.valueForKey("Token") as! String
             }
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
+        self.arrOfMention = NSMutableArray()
         self.getMentionRequest()
-        
     }
     
     func getMentionRequest()
@@ -88,8 +92,8 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                             print("no data availabel")
                             self.tblHome.reloadData()
                         }
-                        
                     }
+                    self.tblHome.reloadData()
                 }
                 else
                 {

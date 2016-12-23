@@ -79,7 +79,6 @@ class ChatListViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     //MARK : tableview delegate and datasource
-    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }

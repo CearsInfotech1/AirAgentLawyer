@@ -159,6 +159,7 @@ class SignupViewController: UIViewController, TpKeyboardDelegate,UICollectionVie
             self.heightOfAccountView.constant = 0
             heightOfCollectionView.constant = 0
         }
+                
         self.getCategory()
     }
     

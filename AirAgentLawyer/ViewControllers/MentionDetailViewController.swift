@@ -29,6 +29,8 @@ class MentionDetailViewController: UIViewController {
     @IBOutlet var Description : UILabel!
     @IBOutlet var descView : UIView!
     
+    @IBOutlet var scrollView: UIScrollView!
+    
     var objOfMention : MentionRequest = MentionRequest()
     var agentID : String = ""
     var Token : String = ""
@@ -93,15 +95,11 @@ class MentionDetailViewController: UIViewController {
                         self.courtAdd2.text = self.respone.valueForKey("Address2") as? String
                         self.Description.text = self.respone.valueForKey("Note") as? String
                         
-                        
-//                        let descVal : String = (self.respone.valueForKey("Note") as? String)!
-//                        let sizeHeight = descVal.heightWithConstrainedWidth(self.view.frame.size.width, font: UIFont.systemFontOfSize(16.0))
-//                        print("label heih",sizeHeight)
-//                        self.descView.frame.size.height = sizeHeight + 10
-//                        self.Description.frame.size.height = sizeHeight
-//                        self.Description.backgroundColor = UIColor.redColor()
-//                        self.view.frame.size.height = 662 + sizeHeight
-//                        self.Description.text = self.respone.valueForKey("Note") as? String
+                        let descVal : String = (self.respone.valueForKey("Note") as? String)!
+                        let sizeHeight = descVal.heightWithConstrainedWidth(self.Description.frame.size.width, font: UIFont.systemFontOfSize(17.0))
+                        self.descView.frame.size.height = sizeHeight + 10
+                        self.Description.frame = CGRectMake(self.Description.frame.origin.x, (self.descView.frame.size.height / 2.0) - (sizeHeight / 2.0), self.Description.frame.size.width, sizeHeight)
+                        self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.descView.frame.origin.y + self.descView.frame.size.height + 50)
                     }
                 }
                 else
