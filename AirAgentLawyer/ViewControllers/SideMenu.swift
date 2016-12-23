@@ -25,16 +25,46 @@ class SideMenuCell: UITableViewCell {
 class SideMenu: UIViewController {
 
     weak var delegate:DetailViewControllerDelegate?
-    
+    var userType : Int!
     @IBOutlet var tblMenu : UITableView!
     
-    var ArrUserMenu : NSMutableArray = ["Home", "My Schedule", "Chat", "My Profile", "Logout"]
-    var ArrUserMenuImage : NSMutableArray = ["ic_drawer_home","ic_drawer_calendar","ic_drawer_chat","ic_drawer_profile","ic_drawer_logout"]
+    var ArrUserMenu : NSMutableArray = NSMutableArray()
+        //["Home", "My Schedule", "Chat", "My Profile", "Logout"]
+    var ArrUserMenuImage : NSMutableArray = NSMutableArray()
+        //["ic_drawer_home","ic_drawer_calendar","ic_drawer_chat","ic_drawer_profile","ic_drawer_logout"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tblMenu.tableFooterView = UIView(frame: CGRect.zero)
+        let user_Data = NSUserDefaults.standardUserDefaults().objectForKey("USER_OBJECT") as? NSData
+        if let userData = user_Data {
+            let userObj = NSKeyedUnarchiver.unarchiveObjectWithData(userData)
+            
+            if let userData_val = userObj {
+                
+                self.userType = userData_val.valueForKey("UserType") as! Int
+            }
+        }
+        if(self.userType == 1)
+        {
+            ArrUserMenu  = ["Home", "My Schedule", "Chat", "My Profile", "Logout"]
+            ArrUserMenuImage = ["ic_drawer_home","ic_drawer_calendar","ic_drawer_chat","ic_drawer_profile","ic_drawer_logout"]
+        }
+        else if(self.userType == 2)
+        {
+            print("call api for court")
+            ArrUserMenu  = ["Home", "Post Project", "Chat", "My Profile", "Logout"]
+            ArrUserMenuImage = ["ic_drawer_home","ic_drawer_calendar","ic_drawer_chat","ic_drawer_profile","ic_drawer_logout"]
+            
+        }
+        else if(self.userType == 3)
+        {
+            print("call api for court")
+            ArrUserMenu  = ["Home","My Schedule", "Post Project", "Chat", "My Profile", "Logout"]
+            ArrUserMenuImage = ["ic_drawer_home","ic_drawer_calendar","ic_drawer_calendar","ic_drawer_chat","ic_drawer_profile","ic_drawer_logout"]
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -70,5 +100,6 @@ class SideMenu: UIViewController {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 //        print("You selected cell #\(indexPath.row)!")
         delegate?.didFinishTask(self, index: indexPath.row)
+        
     }
 }

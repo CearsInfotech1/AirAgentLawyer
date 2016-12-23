@@ -12,6 +12,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet var tblDetail: UITableView!
     var obj : MentionRequest = MentionRequest()
+   
     var statusType : Int!
     
     var userDict: NSDictionary = NSDictionary()

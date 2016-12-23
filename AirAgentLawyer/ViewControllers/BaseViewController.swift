@@ -16,9 +16,20 @@ class BaseViewController: UIViewController, UIAlertViewDelegate {
     var view1: SideMenu!
     
     var isMenuView : Bool = false
+    var userTypeVal : Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let user_Data = NSUserDefaults.standardUserDefaults().objectForKey("USER_OBJECT") as? NSData
+        if let userData = user_Data {
+            let userObj = NSKeyedUnarchiver.unarchiveObjectWithData(userData)
+            
+            if let userData_val = userObj {
+                
+                self.userTypeVal = userData_val.valueForKey("UserType") as! Int
+            }
+        }
         
         self.view1 = SideMenu(nibName: "SideMenu", bundle: nil)
         self.view1.view.backgroundColor = UIColor.clearColor()
@@ -128,24 +139,60 @@ extension BaseViewController: DetailViewControllerDelegate {
                 self.view1.view.removeFromSuperview()
                 
                 if index == 0 {
-                    let Obj = self.storyboard?.instantiateViewControllerWithIdentifier("HomeViewController") as! HomeViewController
-                    self.navigationController?.pushViewController(Obj, animated: false)
+                    if(self.userTypeVal == 1 || self.userTypeVal == 2)
+                    {
+                        let Obj = self.storyboard?.instantiateViewControllerWithIdentifier("HomeViewController") as! HomeViewController
+                        self.navigationController?.pushViewController(Obj, animated: false)
+                    }
+                    else if(self.userTypeVal == 3)
+                    {
+                        let Obj = self.storyboard?.instantiateViewControllerWithIdentifier("AgentPrincipleViewController") as! AgentPrincipleViewController
+                        self.navigationController?.pushViewController(Obj, animated: false)
+                    }
                 }
-                else if index == 1 {
-                    let Obj = self.storyboard?.instantiateViewControllerWithIdentifier(MyScheduleIdentifier) as! MyScheduleViewController
-                    self.navigationController?.pushViewController(Obj, animated: false)
+                else if index == 1
+                {
+                    if(self.userTypeVal == 1 || self.userTypeVal == 3)
+                    {
+                        let Obj = self.storyboard?.instantiateViewControllerWithIdentifier(MyScheduleIdentifier) as! MyScheduleViewController
+                        self.navigationController?.pushViewController(Obj, animated: false)
+                    }
+                    else if(self.userTypeVal == 2)
+                    {
+                        let Obj = self.storyboard?.instantiateViewControllerWithIdentifier("PostProjectViewController") as! PostProjectViewController
+                        self.navigationController?.pushViewController(Obj, animated: false)
+                    }
+                   
                 }
-                else if index == 2 {
-                    let Obj = self.storyboard?.instantiateViewControllerWithIdentifier(ChatListViewIdentifier) as! ChatListViewController
-                    self.navigationController?.pushViewController(Obj, animated: false)
+                else if index == 2
+                {
+                    if(self.userTypeVal == 3)
+                    {
+                        let Obj = self.storyboard?.instantiateViewControllerWithIdentifier("PostProjectViewController") as! PostProjectViewController
+                        self.navigationController?.pushViewController(Obj, animated: false)
+                    }
+                    else
+                    {
+                        let Obj = self.storyboard?.instantiateViewControllerWithIdentifier(ChatListViewIdentifier) as! ChatListViewController
+                        self.navigationController?.pushViewController(Obj, animated: false)
+                    }
                 }
 //                else if index == 3 {
 //                    let Obj = self.storyboard?.instantiateViewControllerWithIdentifier("MyOrderViewController") as! MyOrderViewController
 //                    self.navigationController?.pushViewController(Obj, animated: false)
 //                }*/
-                else if index == 3 {
-                    let Obj = self.storyboard?.instantiateViewControllerWithIdentifier(ProfileViewIdentifier) as! ProfileViewController
+                else if index == 3
+                {
+                    if(self.userTypeVal == 3)
+                    {
+                        let Obj = self.storyboard?.instantiateViewControllerWithIdentifier(ChatListViewIdentifier) as! ChatListViewController
                         self.navigationController?.pushViewController(Obj, animated: false)
+                    }
+                    else
+                    {
+                        let Obj = self.storyboard?.instantiateViewControllerWithIdentifier(ProfileViewIdentifier) as! ProfileViewController
+                            self.navigationController?.pushViewController(Obj, animated: false)
+                    }
                 }
 //                else if index == 4 {
 //                    let Obj = self.storyboard?.instantiateViewControllerWithIdentifier("Notification") as! Notification
@@ -155,11 +202,32 @@ extension BaseViewController: DetailViewControllerDelegate {
                     let Obj = self.storyboard?.instantiateViewControllerWithIdentifier("SettingViewController") as! SettingViewController
                     self.navigationController?.pushViewController(Obj, animated: false)
                 }*/
-                else if index == 4 { // Logout
-                    let alert = UIAlertView(title: "Are you sure you want to Logout?", message: "", delegate: self, cancelButtonTitle: "NO", otherButtonTitles: "YES")
-                    dispatch_async(dispatch_get_main_queue()) {
-                        alert.tag == 102
-                        alert.show()
+                else if index == 4
+                { // Logout
+                    if(self.userTypeVal == 3)
+                    {
+                        let Obj = self.storyboard?.instantiateViewControllerWithIdentifier(ProfileViewIdentifier) as! ProfileViewController
+                        self.navigationController?.pushViewController(Obj, animated: false)
+                    }
+                    else
+                    {
+                        let alert = UIAlertView(title: "Are you sure you want to Logout?", message: "", delegate: self, cancelButtonTitle: "NO", otherButtonTitles: "YES")
+                        dispatch_async(dispatch_get_main_queue()) {
+                            alert.tag == 102
+                            alert.show()
+                        }
+                    }
+                }
+                else if index == 5
+                {
+                    if(self.userTypeVal == 3)
+                    {
+                        let alert = UIAlertView(title: "Are you sure you want to Logout?", message: "", delegate: self, cancelButtonTitle: "NO", otherButtonTitles: "YES")
+                        dispatch_async(dispatch_get_main_queue()) {
+                            alert.tag == 102
+                            alert.show()
+                        }
+
                     }
                 }
             }
@@ -171,6 +239,8 @@ extension BaseViewController: DetailViewControllerDelegate {
         switch buttonIndex{
         case 1:
 //            self.logOutMethod()
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.removeObjectForKey("USER_OBJECT")
             let Obj = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
             self.navigationController?.setViewControllers([Obj], animated: false)
             self.navigationController?.popViewControllerAnimated(false)

@@ -11,9 +11,11 @@ import UIKit
 class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var tblHome: UITableView!
+    @IBOutlet var lblTitle : UILabel!
     var agentID : String = ""
     var arrOfMention : NSMutableArray = NSMutableArray()
     var Token : String = ""
+    var userType : Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,16 +32,102 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                 
                 self.agentID = String(userData_val.valueForKey("userid") as! Int)
                 self.Token = userData_val.valueForKey("Token") as! String
+                self.userType = userData_val.valueForKey("UserType") as! Int
             }
         }
-        
-        self.getMentionRequest()
+        if(self.userType == 1)
+        {
+            self.getMentionRequest()
+        }
+        else if(self.userType == 2)
+        {
+            print("call api for court")
+            self.lblTitle.text = NSLocalizedString("Principal Request Post", comment: "comm")
+            self.getPendingPostRequest()
+        }
         
     }
     
+    func getPendingPostRequest()
+    {
+        self.arrOfMention = []
+        var arrPost = []
+        
+        //API Calling
+        GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))
+        
+        let str = "Principle/PendingPost?UserId="+self.agentID
+        let request = NSMutableURLRequest(URL: NSURL(string: BASE_URL+str)!)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(self.Token, forHTTPHeaderField: "Token")
+        request.addValue(self.agentID, forHTTPHeaderField: "UserId")
+        
+        GlobalClass.sharedInstance.get(request, params: "") { (success, object) in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                print("obj",object)
+                if success
+                {
+                    GlobalClass.sharedInstance.stopIndicator()
+                    
+                    if let object = object
+                    {
+                        print("response object principle",object)
+                        print("dat ",object.valueForKey("Data"))
+                        if(!object.valueForKey("Data")!.isKindOfClass(NSNull))
+                        {
+                            print("not null")
+                            arrPost = object.valueForKey("Data") as! NSArray
+                            for i in 0  ..< arrPost.count
+                            {
+                                let postPrjctObj : PostProjectRequest = PostProjectRequest()
+                                
+                                    postPrjctObj.A_Address = arrPost[i].valueForKey("A_Address") as? String ?? ""
+                                    postPrjctObj.A_Email = arrPost[i].valueForKey("A_Email") as? String ?? ""
+                                    postPrjctObj.A_FirstName = arrPost[i].valueForKey("A_FirstName") as? String ?? ""
+                                    postPrjctObj.A_MobileNo = (arrPost[i].valueForKey("A_MobileNo") as? String ?? "")!
+                                    postPrjctObj.Address = arrPost[i].valueForKey("Address") as? String ?? ""
+                                    postPrjctObj.CourtName = arrPost[i].valueForKey("CourtName") as? String ?? ""
+                                    postPrjctObj.Date = arrPost[i].valueForKey("Date") as? String ?? ""
+                                    postPrjctObj.Email = arrPost[i].valueForKey("Email") as? String ?? ""
+                                    postPrjctObj.FirstName = arrPost[i].valueForKey("FirstName") as? String ?? ""
+                                    postPrjctObj.MentionId = (arrPost[i].valueForKey("MentionId") as? Int)!
+                                    postPrjctObj.MobileNo = (arrPost[i].valueForKey("MobileNo") as? String ?? "")!
+                                    postPrjctObj.Status = (arrPost[i].valueForKey("Status") as? Int)!
+                                
+                                self.arrOfMention.addObject(postPrjctObj)
+                            }
+                           self.tblHome.reloadData()
+                        }
+                        else
+                        {
+                            print("no data availabel")
+                            self.tblHome.reloadData()
+                        }
+                        
+                    }
+                }
+                else
+                {
+                    GlobalClass.sharedInstance.stopIndicator()
+                    if(!object!.valueForKey("Data")!.isKindOfClass(NSNull))
+                    {
+                        print("not null")
+                    }
+                    else
+                    {
+                        print("no data availabel")
+                    }
+                    self.tblHome.reloadData()
+                }
+            })
+        }
+    }
+    
+
     func getMentionRequest()
     {
         var arrMention = []
+        self.arrOfMention = []
         
         //API Calling
         GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))
@@ -143,23 +231,42 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         {
             let cell:HomeCell = tableView.dequeueReusableCellWithIdentifier("HomeCell") as! HomeCell
             
-            let mentionObj = self.arrOfMention.objectAtIndex(indexPath.row) as! MentionRequest
-            print("entire obj",mentionObj)
-            print(mentionObj.CourtAddress)
-            
-            cell.selectionStyle = .None
-            
-            cell.lblTitle.text = mentionObj.CourtName
-            cell.lblSubtitle.text = mentionObj.ClientName
-            cell.lblLocation.text = mentionObj.CourtAddress
-            
-            let formatter : NSDateFormatter = NSDateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-            let dt = formatter.dateFromString(mentionObj.MentionDate)
-            formatter.dateFormat = "dd/MM/yyyy"
-            print(formatter.stringFromDate(dt!))
-            cell.lblDate.text = formatter.stringFromDate(dt!)
+            if(self.userType == 1)
+            {
+                let mentionObj = self.arrOfMention.objectAtIndex(indexPath.row) as! MentionRequest
+                print("entire obj",mentionObj)
+                print(mentionObj.CourtAddress)
+                
+                cell.selectionStyle = .None
+                
+                cell.lblTitle.text = mentionObj.CourtName
+                cell.lblSubtitle.text = mentionObj.ClientName
+                cell.lblLocation.text = mentionObj.CourtAddress
+                
+                let formatter : NSDateFormatter = NSDateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+                let dt = formatter.dateFromString(mentionObj.MentionDate)
+                formatter.dateFormat = "dd/MM/yyyy"
+                print(formatter.stringFromDate(dt!))
+                cell.lblDate.text = formatter.stringFromDate(dt!)
+            }
+            else if(self.userType == 2)
+            {
+                let postObj = self.arrOfMention.objectAtIndex(indexPath.row) as! PostProjectRequest
 
+                cell.selectionStyle = .None
+                
+                cell.lblTitle.text = postObj.CourtName
+                cell.lblSubtitle.text = postObj.A_FirstName
+                cell.lblLocation.text = postObj.Address
+                
+                let formatter : NSDateFormatter = NSDateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+                let dt = formatter.dateFromString(postObj.Date)
+                formatter.dateFormat = "dd/MM/yyyy"
+                print(formatter.stringFromDate(dt!))
+                cell.lblDate.text = formatter.stringFromDate(dt!)
+            }
             return cell
         }
         else
@@ -177,10 +284,23 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let mentionObj = self.arrOfMention.objectAtIndex(indexPath.row) as! MentionRequest
-        let vcObj = self.storyboard?.instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController
-        vcObj.obj = mentionObj
-        self.navigationController?.pushViewController(vcObj, animated: true)
+        
+        if(self.userType == 1)
+        {
+            let vcObj = self.storyboard?.instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController
+            let mentionObj = self.arrOfMention.objectAtIndex(indexPath.row) as! MentionRequest
+            vcObj.obj = mentionObj
+             self.navigationController?.pushViewController(vcObj, animated: true)
+        }
+        else if(self.userType == 2)
+        {
+             let vcObj = self.storyboard?.instantiateViewControllerWithIdentifier("PrincipleDetailViewController") as! PrincipleDetailViewController
+            let postObj = self.arrOfMention.objectAtIndex(indexPath.row) as! PostProjectRequest
+            vcObj.postRequest = postObj
+            self.navigationController?.pushViewController(vcObj, animated: true)
+        }
+        
+       
     }
 
     override func didReceiveMemoryWarning() {

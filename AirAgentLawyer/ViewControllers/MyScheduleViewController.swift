@@ -99,7 +99,22 @@ class MyScheduleViewController: UIViewController,RSDFDatePickerViewDelegate , RS
         
         if (self.datesToMark.containsObject(dateVal))
         {
-            print("display list")
+            var mentionObj : DataSchedule = DataSchedule()
+            for i in 0 ..< self.datesToMark.count
+            {
+                if(self.datesToMark[i] as! String == dateVal )
+                {
+                    print("index pos")
+                mentionObj = self.arrOfSchedule.objectAtIndex(i) as! DataSchedule
+                    let editPost = self.storyboard?.instantiateViewControllerWithIdentifier("AddScheduleViewController") as! AddScheduleViewController
+                    editPost.fromEdit = "yes"
+                    editPost.objectVal = mentionObj
+                    self.navigationController?.pushViewController(editPost, animated: true)
+                    return
+                    
+                }
+            }
+            
         }
         else
         {
@@ -142,8 +157,9 @@ class MyScheduleViewController: UIViewController,RSDFDatePickerViewDelegate , RS
                     
                     if let object = object
                     {
-                        print("response object",object)
+                        print("response object of schedule data",object)
                         self.arrOfSchedule = []
+                        self.datesToMark = []
                         if(!object.valueForKey("Data")!.isKindOfClass(NSNull))
                         {
                             print("not null")

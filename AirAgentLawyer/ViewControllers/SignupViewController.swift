@@ -138,15 +138,19 @@ class SignupViewController: UIViewController, TpKeyboardDelegate,UICollectionVie
             self.viewOfCategory.hidden = true
             self.heightOfcatView.constant = 0
             
-            let lowArea : NSString = self.dictOfUser.valueForKey("LawArea") as! NSString
-            self.lawAreaArr = (lowArea.componentsSeparatedByString("|") as? NSMutableArray)!
-            for i in 0  ..< self.lawAreaArr.count
+            if(!self.dictOfUser.valueForKey("LawArea")!.isKindOfClass(NSNull))
             {
-                 self.arrOfLawArea.addObject(Int(self.lawAreaArr[i] as! String)!)
+                let lowArea : NSString = self.dictOfUser.valueForKey("LawArea") as! NSString
+                self.lawAreaArr = (lowArea.componentsSeparatedByString("|") as? NSMutableArray)!
+                for i in 0  ..< self.lawAreaArr.count
+                {
+                    self.arrOfLawArea.addObject(Int(self.lawAreaArr[i] as! String)!)
+                }
+                
+                print("arr of low area",self.lawAreaArr)
+                print("arr of arr low arear",self.arrOfLawArea)
             }
-           
-            print("arr of low area",self.lawAreaArr)
-            print("arr of arr low arear",self.arrOfLawArea)
+            
             
         }
         else

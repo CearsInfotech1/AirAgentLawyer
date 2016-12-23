@@ -13,10 +13,15 @@ class PopupViewController: UIViewController, TpKeyboardDelegate {
     @IBOutlet var btnClose: UIButton!
     @IBOutlet var txtTitle: UITextField!
     @IBOutlet var txtViewDesc: UITextView!
-
-    var objData : MentionRequest = MentionRequest()
+    @IBOutlet var btnSubmit : UIButton!
+    @IBOutlet var lblTitle : UILabel!
     
+    var objData : MentionRequest = MentionRequest()
+    var fromPrinciple : String = ""
     var userDict: NSMutableDictionary = NSMutableDictionary()
+    var Token : String = ""
+    var agentID : String = ""
+    var mentionID : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,11 +38,54 @@ class PopupViewController: UIViewController, TpKeyboardDelegate {
                 
                 print("userobject : ", userData_val)
                 userDict = NSMutableDictionary(dictionary: userData_val as! NSDictionary)
+                self.agentID = String(userData_val.valueForKey("userid") as! Int)
+                self.Token = userData_val.valueForKey("Token") as! String
             }
+        }
+        if(self.fromPrinciple == "yes")
+        {
+            self.btnSubmit.hidden = true
+            self.lblTitle.text = NSLocalizedString("View Outcomes", comment: "comm")
+            self.getOutComes()
         }
     }
     
-    
+    func getOutComes()
+    {
+        //API Calling
+        var dicOfOutcome : NSDictionary = NSDictionary()
+        GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))
+        
+        let str = "Agent/GetOutcomebyMentionid?MentionId="+self.mentionID
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: BASE_URL+str)!)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(self.Token, forHTTPHeaderField: "Token")
+        request.addValue(self.agentID, forHTTPHeaderField: "UserId")
+        
+        GlobalClass.sharedInstance.get(request, params: "") { (success, object) in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                print("obj",object)
+                GlobalClass.sharedInstance.stopIndicator()
+                if success
+                {
+                    GlobalClass.sharedInstance.stopIndicator()
+                    
+                    if let object = object
+                    {
+                        print("response object of view outcomes",object)
+                        dicOfOutcome = object.valueForKey("Result") as! NSDictionary
+                        self.txtTitle.text = dicOfOutcome.valueForKey("title") as? String
+                        self.txtTitle.textColor = UIColor(red: 0/255, green: 174/255, blue: 239/255, alpha: 1.0)
+                        self.txtViewDesc.text = dicOfOutcome.valueForKey("OutcomesDetail") as! String
+                        self.txtViewDesc.textColor = UIColor(red: 0/255, green: 174/255, blue: 239/255, alpha: 1.0)
+                        self.txtViewDesc.userInteractionEnabled = false
+                    }
+                }
+            })
+        }
+    }
+
     //MARK: Close clicked
     @IBAction func btnCloseClick(sender : UIButton) {
         

@@ -165,6 +165,10 @@ class ChatListViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.navigationController?.pushViewController(messageView, animated: true)
     }
 
+    @IBAction func btnBack(sender : UIButton)
+    {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

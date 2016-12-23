@@ -169,6 +169,7 @@ NSInteger GlobalIndexSectionEnd = 0;
         [_collectionView reloadData];
         [_collectionView layoutIfNeeded];
         [self scrollToToday:NO];
+//        _collectionView.
     }
     return _collectionView;
 }

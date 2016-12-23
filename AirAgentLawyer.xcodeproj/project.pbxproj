@@ -87,6 +87,10 @@
 		2BF0B4BE1DE959B700512899 /* RSDFDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF0B4B61DE959B700512899 /* RSDFDatePickerView.m */; };
 		2BF0B4C31DE95B3E00512899 /* AddScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF0B4C21DE95B3E00512899 /* AddScheduleViewController.swift */; };
 		2BF0B4C61DE95D3000512899 /* MyScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF0B4C51DE95D3000512899 /* MyScheduleViewController.swift */; };
+		8460CFD91E0B91FE0067BC56 /* PostProjectRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8460CFD81E0B91FE0067BC56 /* PostProjectRequest.swift */; };
+		8460CFDB1E0B9C610067BC56 /* PrincipleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8460CFDA1E0B9C610067BC56 /* PrincipleDetailViewController.swift */; };
+		8460CFDD1E0BAC6B0067BC56 /* PostProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8460CFDC1E0BAC6B0067BC56 /* PostProjectViewController.swift */; };
+		8460CFE41E0BDE950067BC56 /* AgentPrincipleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8460CFE31E0BDE950067BC56 /* AgentPrincipleViewController.swift */; };
 		848FEB381E07B25000945222 /* MentionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FEB371E07B25000945222 /* MentionRequest.swift */; };
 		84C0CDB51E03BE9500078FEA /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C0CDB41E03BE9500078FEA /* ChangePasswordViewController.swift */; };
 		84C0CDDA1E03C9C900078FEA /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C0CDBA1E03C9C900078FEA /* MKAnnotationView+WebCache.m */; };
@@ -256,6 +260,10 @@
 		2BF0B4B71DE959B700512899 /* RSDFDatePickerView+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RSDFDatePickerView+Protected.h"; sourceTree = "<group>"; };
 		2BF0B4C21DE95B3E00512899 /* AddScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddScheduleViewController.swift; sourceTree = "<group>"; };
 		2BF0B4C51DE95D3000512899 /* MyScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyScheduleViewController.swift; sourceTree = "<group>"; };
+		8460CFD81E0B91FE0067BC56 /* PostProjectRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostProjectRequest.swift; sourceTree = "<group>"; };
+		8460CFDA1E0B9C610067BC56 /* PrincipleDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrincipleDetailViewController.swift; sourceTree = "<group>"; };
+		8460CFDC1E0BAC6B0067BC56 /* PostProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostProjectViewController.swift; sourceTree = "<group>"; };
+		8460CFE31E0BDE950067BC56 /* AgentPrincipleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgentPrincipleViewController.swift; sourceTree = "<group>"; };
 		848FEB371E07B25000945222 /* MentionRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionRequest.swift; sourceTree = "<group>"; };
 		84C0CDB41E03BE9500078FEA /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		84C0CDB91E03C9C900078FEA /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
@@ -563,6 +571,9 @@
 				84E33C831E08E03E00501291 /* MentionDetailViewController.swift */,
 				1846AD8D1E0A71AD0051FB47 /* PopupViewController.swift */,
 				18162D931E0A91E000D9DAE2 /* ChatListViewController.swift */,
+				8460CFDA1E0B9C610067BC56 /* PrincipleDetailViewController.swift */,
+				8460CFDC1E0BAC6B0067BC56 /* PostProjectViewController.swift */,
+				8460CFE31E0BDE950067BC56 /* AgentPrincipleViewController.swift */,
 			);
 			name = Controller;
 			path = ViewControllers;
@@ -597,6 +608,7 @@
 			children = (
 				848FEB371E07B25000945222 /* MentionRequest.swift */,
 				84CE97C41E0A765E00A6BFAA /* DataSchedule.swift */,
+				8460CFD81E0B91FE0067BC56 /* PostProjectRequest.swift */,
 			);
 			name = Modal;
 			sourceTree = "<group>";
@@ -762,11 +774,13 @@
 				180148251E0A6E6D00C99D16 /* JSQMessagesCellTextView.m in Sources */,
 				84C0CDDD1E03C9C900078FEA /* SDWebImageCompat.m in Sources */,
 				1801481D1E0A6E6D00C99D16 /* JSQLocationMediaItem.m in Sources */,
+				8460CFE41E0BDE950067BC56 /* AgentPrincipleViewController.swift in Sources */,
 				189520001DE6ECA900017A0F /* SignupViewController.swift in Sources */,
 				180148211E0A6E6D00C99D16 /* JSQMessagesBubbleImage.m in Sources */,
 				2BF0B4B81DE959B700512899 /* NSCalendar+RSDFAdditions.m in Sources */,
 				180148161E0A6E6D00C99D16 /* JSQMessagesToolbarButtonFactory.m in Sources */,
 				1895200E1DE6FD9A00017A0F /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
+				8460CFDD1E0BAC6B0067BC56 /* PostProjectViewController.swift in Sources */,
 				84C0CDE91E03C9C900078FEA /* UIView+WebCacheOperation.m in Sources */,
 				1846AD8E1E0A71AD0051FB47 /* PopupViewController.swift in Sources */,
 				180148091E0A6E6D00C99D16 /* NSBundle+JSQMessages.m in Sources */,
@@ -794,6 +808,7 @@
 				84C0CDE71E03C9C900078FEA /* UIImageView+HighlightedWebCache.m in Sources */,
 				2BF0B4BB1DE959B700512899 /* RSDFDatePickerDayCell.m in Sources */,
 				180148281E0A6E6D00C99D16 /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
+				8460CFD91E0B91FE0067BC56 /* PostProjectRequest.swift in Sources */,
 				18F0243A1DE4144E005FC57F /* AirAgentLawyer.xcdatamodeld in Sources */,
 				18F024321DE4144E005FC57F /* AppDelegate.swift in Sources */,
 				1801481A1E0A6E6D00C99D16 /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.m in Sources */,
@@ -804,6 +819,7 @@
 				1801481C1E0A6E6D00C99D16 /* MessageViewController.m in Sources */,
 				1801482F1E0A6E6D00C99D16 /* JSQMessagesLoadEarlierHeaderView.m in Sources */,
 				18F0244E1DE416DB005FC57F /* SwiftLoader.swift in Sources */,
+				8460CFDB1E0B9C610067BC56 /* PrincipleDetailViewController.swift in Sources */,
 				180148201E0A6E6D00C99D16 /* JSQMessagesAvatarImage.m in Sources */,
 				84CE97CA1E0A875000A6BFAA /* SBPickerSelector.m in Sources */,
 				180148081E0A6E6D00C99D16 /* JSQSystemSoundPlayer+JSQMessages.m in Sources */,

@@ -67,9 +67,15 @@ class LoginViewController: UIViewController, TpKeyboardDelegate {
                             NSUserDefaults.standardUserDefaults().setObject(userData, forKey: "USER_OBJECT")
                             
                             let result = object.valueForKey("Result") as! NSDictionary
-                            if(result.valueForKey("UserType") as! Int == 1)
+                            print("user type value ",result.valueForKey("UserType"))
+                            if(result.valueForKey("UserType") as! Int == 1 || result.valueForKey("UserType") as! Int == 2)
                             {
                                 let vcObj = self.storyboard?.instantiateViewControllerWithIdentifier("HomeViewController") as! HomeViewController
+                                self.navigationController?.pushViewController(vcObj, animated: true)
+                            }
+                            else if(result.valueForKey("UserType") as! Int == 3)
+                            {
+                                let vcObj = self.storyboard?.instantiateViewControllerWithIdentifier("AgentPrincipleViewController") as! AgentPrincipleViewController
                                 self.navigationController?.pushViewController(vcObj, animated: true)
                             }
                         }

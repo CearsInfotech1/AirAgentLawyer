@@ -88,13 +88,27 @@ class ProfileViewController: UIViewController,UIActionSheetDelegate, UINavigatio
                     {
                         print("response object",object)
                         print("dat ",object.valueForKey("Result"))
-                        
+                        var address  : String = ""
                         self.ResultDic = object.valueForKey("Result") as! NSDictionary
                         self.lblFname.text = self.ResultDic.valueForKey("FirstName") as? String
                         self.lblLname.text = self.ResultDic.valueForKey("LastName") as? String
-                        if(!self.ResultDic.valueForKey("Address")!.isKindOfClass(NSNull))
+                        if(!self.ResultDic.valueForKey("Street")!.isKindOfClass(NSNull))
                         {
-                            self.lblAdd.text = self.ResultDic.valueForKey("LastName") as? String
+                            address = self.ResultDic.valueForKey("Street") as! String
+//                            self.lblAdd.text = self.ResultDic.valueForKey("LastName") as? String
+                        }
+                        if(!self.ResultDic.valueForKey("Town")!.isKindOfClass(NSNull))
+                        {
+                            address = address + "," + (self.ResultDic.valueForKey("Town") as! String)
+                        }
+                        if(!self.ResultDic.valueForKey("State")!.isKindOfClass(NSNull))
+                        {
+                            address = address + "," + (self.ResultDic.valueForKey("State") as! String)
+                        }
+                        if(address != "")
+                        {
+                            self.lblAdd.text = address
+
                         }
                         else
                         {

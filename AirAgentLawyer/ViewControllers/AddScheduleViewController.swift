@@ -26,7 +26,13 @@ class AddScheduleViewController: UIViewController,SBPickerSelectorDelegate {
     @IBOutlet var txtCity : UITextField!
     @IBOutlet var txtState : UITextField!
     @IBOutlet var txtCountry : UITextField!
+    @IBOutlet var lblTitle : UILabel!
+    @IBOutlet var btnEdit : UIButton!
     
+    var fromEdit : String = ""
+    var objectVal : DataSchedule = DataSchedule()
+    var respone : NSDictionary = NSDictionary()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -47,6 +53,15 @@ class AddScheduleViewController: UIViewController,SBPickerSelectorDelegate {
             }
         }
         
+        if(self.fromEdit == "yes")
+        {
+            self.txtRate.text = String(objectVal.Rate)
+            self.firstHrRate.text = String(objectVal.FirstHourRate)
+            self.nextHrRate.text = String(objectVal.AfterFirstHourRate)
+
+            self.btnEdit.setTitle(NSLocalizedString("Submit", comment: "comm"), forState: UIControlState.Normal)
+            self.lblTitle.text = NSLocalizedString("Update Schedule", comment: "comm")
+        }
         self.getCourt()
     }
 
@@ -78,6 +93,16 @@ class AddScheduleViewController: UIViewController,SBPickerSelectorDelegate {
                         self.arrOfCategory = object.valueForKey("Data") as! NSArray
                         for i in 0  ..< self.arrOfCategory.count
                         {
+                            if(self.arrOfCategory[i].valueForKey("CourtId") as! Int == self.objectVal.LocationId)
+                            {
+                            self.btnCourt.setTitle(self.arrOfCategory[i].valueForKey("CourtName")! as? String, forState: UIControlState.Normal)
+                                self.courtID = String(self.arrOfCategory[i].valueForKey("CourtId")! as! Int)
+                                self.txtCity.text = self.arrOfCategory[i].valueForKey("City")! as? String
+                                self.txtState.text = self.arrOfCategory[i].valueForKey("State")! as? String
+                                self.txtCountry.text = self.arrOfCategory[i].valueForKey("Country")! as? String
+                                self.txtAdd1.text = self.arrOfCategory[i].valueForKey("Address1")! as? String
+                                self.txtAdd2.text = self.arrOfCategory[i].valueForKey("Address2")! as? String
+                            }
                         self.arrOfCourtName.addObject(self.arrOfCategory[i].valueForKey("CourtName")!)
                         }
 
@@ -137,49 +162,80 @@ class AddScheduleViewController: UIViewController,SBPickerSelectorDelegate {
             return
         }
         
-        GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))
-        print("value is ",self.courtID)
         let paramDic : NSMutableDictionary = NSMutableDictionary()
-        paramDic.setValue(self.agentID, forKey: "UserId")
-        paramDic.setValue(selectedDate, forKey: "SheduleDate")
-        paramDic.setValue(self.courtID, forKey: "LocationId")
-        paramDic.setValue(self.txtRate.text, forKey: "Rate")
-        paramDic.setValue(self.firstHrRate.text, forKey: "FirstHourRate")
-        paramDic.setValue(self.nextHrRate.text, forKey: "AfterFirstHourRate")
+        var request : NSMutableURLRequest = NSMutableURLRequest()
+        if(self.fromEdit == "yes")
+        {
+           paramDic.setValue(self.objectVal.DetailId, forKey: "DetailId")
+            paramDic.setValue(self.agentID, forKey: "UserId")
+            paramDic.setValue(self.objectVal.SheduleDate, forKey: "SheduleDate")
+            paramDic.setValue(self.courtID, forKey: "LocationId")
+            paramDic.setValue(self.objectVal.IsActive, forKey: "IsActive")
+            paramDic.setValue(self.txtRate.text, forKey: "Rate")
+            paramDic.setValue(self.firstHrRate.text, forKey: "FirstHourRate")
+            paramDic.setValue(self.nextHrRate.text, forKey: "AfterFirstHourRate")
+            
+        }
+        else
+        {
+            print("value is ",self.courtID)
+            paramDic.setValue(self.agentID, forKey: "UserId")
+            paramDic.setValue(selectedDate, forKey: "SheduleDate")
+            paramDic.setValue(self.courtID, forKey: "LocationId")
+            paramDic.setValue(self.txtRate.text, forKey: "Rate")
+            paramDic.setValue(self.firstHrRate.text, forKey: "FirstHourRate")
+            paramDic.setValue(self.nextHrRate.text, forKey: "AfterFirstHourRate")
+        }
         
-        let jsonData = try! NSJSONSerialization.dataWithJSONObject(paramDic, options: NSJSONWritingOptions())
-        let jsonString = NSString(data: jsonData, encoding: NSUTF8StringEncoding) as! String
-        print("json string",jsonString)
+        GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))
+
+            let jsonData = try! NSJSONSerialization.dataWithJSONObject(paramDic, options: NSJSONWritingOptions())
+            let jsonString = NSString(data: jsonData, encoding: NSUTF8StringEncoding) as! String
+            print("json string",jsonString)
+            
+            
+            //API Calling
+            
+            if(self.fromEdit == "yes")
+            {
+                 request = NSMutableURLRequest(URL: NSURL(string: BASE_URL+"/Agent/UpdateScheduledata")!)
+            }
+            else
+            {
+                request = NSMutableURLRequest(URL: NSURL(string: BASE_URL+"/Agent/AddShedule")!)
+            }
+            print("request",request)
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue(self.Token, forHTTPHeaderField: "Token")
+            request.addValue(self.agentID, forHTTPHeaderField: "UserId")
         
-        
-        //API Calling
-        
-        let request = NSMutableURLRequest(URL: NSURL(string: BASE_URL+"/Agent/AddShedule")!)
-        print("request",request)
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue(self.Token, forHTTPHeaderField: "Token")
-        request.addValue(self.agentID, forHTTPHeaderField: "UserId")
-        
-        GlobalClass.sharedInstance.post(request, params: jsonString) { (success, object) in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                print("obj",object)
-                GlobalClass.sharedInstance.stopIndicator()
-                if success
-                {
+            GlobalClass.sharedInstance.post(request, params: jsonString) { (success, object) in
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    print("obj",object)
                     GlobalClass.sharedInstance.stopIndicator()
-                    
-                    if let object = object
+                    if success
                     {
-                        print("response object",object)
-                        if(object.valueForKey("IsSuccess") as! Bool == true)
+                        GlobalClass.sharedInstance.stopIndicator()
+                        
+                        if let object = object
                         {
-                            GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("Schedule Added Successfully", comment: "comm"))
-                            self.navigationController?.popViewControllerAnimated(true)
+                            print("response object",object)
+                            if(object.valueForKey("IsSuccess") as! Bool == true)
+                            {
+                                if(self.fromEdit == "yes")
+                                {
+                                    GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("Schedule Update Successfully", comment: "comm"))
+                                }
+                                else
+                                {
+                                    GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("Schedule Added Successfully", comment: "comm"))
+                                }
+                                self.navigationController?.popViewControllerAnimated(true)
+                            }
                         }
                     }
-                }
-            })
-        }
+                })
+            }
     }
     
     @IBAction func btnBack(sender : UIButton)

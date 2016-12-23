@@ -103,7 +103,8 @@
     
     CGFloat selfItemWidth = (CGRectGetWidth(self.collectionView.frame) - totalInteritemSpacing) / numberOfItemsInTheSameRow;
     selfItemWidth = floor(selfItemWidth * 1000) / 1000;
-    CGFloat selfItemHeight = 70.0f;
+    CGFloat selfItemHeight = 50.0f;
+     //CGFloat selfItemHeight = 70.0f;
     
     return (CGSize){ selfItemWidth, selfItemHeight };
 }

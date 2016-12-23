@@ -30,10 +30,12 @@ class MentionDetailViewController: UIViewController {
     @IBOutlet var descView : UIView!
     
     var objOfMention : MentionRequest = MentionRequest()
+    var principleObj : PostProjectRequest = PostProjectRequest()
+    
     var agentID : String = ""
     var Token : String = ""
     var respone : NSDictionary = NSDictionary()
-    
+    var userType : Int!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,19 +48,26 @@ class MentionDetailViewController: UIViewController {
                 
                 self.agentID = String(userData_val.valueForKey("userid") as! Int)
                 self.Token = userData_val.valueForKey("Token") as! String
+                self.userType = userData_val.valueForKey("UserType") as! Int
             }
         }
-        self.getDetail()
         
+        self.getDetail()
     }
 
     func getDetail()
     {
         //API Calling
-        
+        var str : String = ""
         GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))
-        print("mention is",objOfMention.MentionId)
-        let str = "Agent/FullmentionDetail?MentionId="+String(objOfMention.MentionId)
+        if(self.userType == 1)
+        {
+            str = "Agent/FullmentionDetail?MentionId="+String(objOfMention.MentionId)
+        }
+        else if(self.userType == 2)
+        {
+            str = "Agent/FullmentionDetail?MentionId="+String(principleObj.MentionId)
+        }
         
         let request = NSMutableURLRequest(URL: NSURL(string: BASE_URL+str)!)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -93,15 +102,6 @@ class MentionDetailViewController: UIViewController {
                         self.courtAdd2.text = self.respone.valueForKey("Address2") as? String
                         self.Description.text = self.respone.valueForKey("Note") as? String
                         
-                        
-//                        let descVal : String = (self.respone.valueForKey("Note") as? String)!
-//                        let sizeHeight = descVal.heightWithConstrainedWidth(self.view.frame.size.width, font: UIFont.systemFontOfSize(16.0))
-//                        print("label heih",sizeHeight)
-//                        self.descView.frame.size.height = sizeHeight + 10
-//                        self.Description.frame.size.height = sizeHeight
-//                        self.Description.backgroundColor = UIColor.redColor()
-//                        self.view.frame.size.height = 662 + sizeHeight
-//                        self.Description.text = self.respone.valueForKey("Note") as? String
                     }
                 }
                 else
@@ -112,7 +112,7 @@ class MentionDetailViewController: UIViewController {
             })
         }
     }
-    
+
     @IBAction func btnBackClick(sender : UIButton)
     {
        self.navigationController?.popViewControllerAnimated(true)
