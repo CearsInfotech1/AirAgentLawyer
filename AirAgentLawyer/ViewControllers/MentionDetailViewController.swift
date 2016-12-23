@@ -104,6 +104,11 @@ class MentionDetailViewController: UIViewController {
                         self.courtAdd2.text = self.respone.valueForKey("Address2") as? String
                         self.Description.text = self.respone.valueForKey("Note") as? String
                         
+                        let descVal : String = (self.respone.valueForKey("Note") as? String)!
+                        let sizeHeight = descVal.heightWithConstrainedWidth(self.Description.frame.size.width, font: UIFont.systemFontOfSize(17.0))
+                        self.descView.frame.size.height = sizeHeight + 10
+                        self.Description.frame = CGRectMake(self.Description.frame.origin.x, (self.descView.frame.size.height / 2.0) - (sizeHeight / 2.0), self.Description.frame.size.width, sizeHeight)
+                        self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.descView.frame.origin.y + self.descView.frame.size.height + 50)
                     }
                 }
                 else
