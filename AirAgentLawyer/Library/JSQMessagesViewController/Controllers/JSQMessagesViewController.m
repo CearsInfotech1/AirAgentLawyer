@@ -100,6 +100,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 
 @implementation JSQMessagesViewController
+@synthesize lblTitle, lblSubtitle, lblLocation, lblDate;
 
 -(IBAction) backBtnClicked:(id)sender {
     

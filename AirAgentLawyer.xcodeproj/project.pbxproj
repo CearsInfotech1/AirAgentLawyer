@@ -58,6 +58,7 @@
 		18162D971E0A959800D9DAE2 /* CommonClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 18162D961E0A959800D9DAE2 /* CommonClass.m */; };
 		1846AD8E1E0A71AD0051FB47 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1846AD8D1E0A71AD0051FB47 /* PopupViewController.swift */; };
 		1846AD911E0A72520051FB47 /* UIVViewController-SLPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1846AD901E0A72520051FB47 /* UIVViewController-SLPopup.swift */; };
+		187010241E0E4C1B008ED2FA /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 187010231E0E4C1B008ED2FA /* Reachability.m */; };
 		18951FEC1DE6BB4200017A0F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18951FEB1DE6BB4200017A0F /* HomeViewController.swift */; };
 		18951FEE1DE6BE8100017A0F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18951FED1DE6BE8100017A0F /* DetailViewController.swift */; };
 		18951FF91DE6E5F400017A0F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18951FF71DE6E5F400017A0F /* BaseViewController.swift */; };
@@ -217,6 +218,8 @@
 		18162D961E0A959800D9DAE2 /* CommonClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonClass.m; sourceTree = "<group>"; };
 		1846AD8D1E0A71AD0051FB47 /* PopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		1846AD901E0A72520051FB47 /* UIVViewController-SLPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIVViewController-SLPopup.swift"; sourceTree = "<group>"; };
+		187010221E0E4C1B008ED2FA /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		187010231E0E4C1B008ED2FA /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		18951FEB1DE6BB4200017A0F /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		18951FED1DE6BE8100017A0F /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		18951FF71DE6E5F400017A0F /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -486,6 +489,15 @@
 			path = SLPopupViewController;
 			sourceTree = "<group>";
 		};
+		187010211E0E4C1B008ED2FA /* Rechability */ = {
+			isa = PBXGroup;
+			children = (
+				187010221E0E4C1B008ED2FA /* Reachability.h */,
+				187010231E0E4C1B008ED2FA /* Reachability.m */,
+			);
+			path = Rechability;
+			sourceTree = "<group>";
+		};
 		189520011DE6F38400017A0F /* TPKeyBoard */ = {
 			isa = PBXGroup;
 			children = (
@@ -547,6 +559,7 @@
 		18F024471DE4164F005FC57F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				187010211E0E4C1B008ED2FA /* Rechability */,
 				18F014F71E0BB0F700A5D9B9 /* NSBundle+Language.h */,
 				18F014F81E0BB0F700A5D9B9 /* NSBundle+Language.m */,
 				1846AD8F1E0A72520051FB47 /* SLPopupViewController */,
@@ -818,6 +831,7 @@
 				18F024321DE4144E005FC57F /* AppDelegate.swift in Sources */,
 				1801481A1E0A6E6D00C99D16 /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.m in Sources */,
 				2BF0B4C61DE95D3000512899 /* MyScheduleViewController.swift in Sources */,
+				187010241E0E4C1B008ED2FA /* Reachability.m in Sources */,
 				84C0CDDB1E03C9C900078FEA /* NSData+ImageContentType.m in Sources */,
 				1801482E1E0A6E6D00C99D16 /* JSQMessagesLabel.m in Sources */,
 				180148131E0A6E6D00C99D16 /* JSQMessagesBubbleImageFactory.m in Sources */,
@@ -988,6 +1002,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 9HANAXMRQ4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AirAgentLawyer/FBFramework",
+				);
 				INFOPLIST_FILE = AirAgentLawyer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1006,6 +1024,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 9HANAXMRQ4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AirAgentLawyer/FBFramework",
+				);
 				INFOPLIST_FILE = AirAgentLawyer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -21,8 +21,8 @@
 
 //#import "FoodLa-Swift.h"
 //#import "Reachability.h"
-#import "AirAgentLawyer-Swift.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "AirAgentLawyer-Swift.h"
 
 #define		STATUS_LOADING						1
 #define		STATUS_FAILED						2
@@ -44,12 +44,15 @@
     NSTimer *msgTimer;
 }
 
+
+
 //@property (nonatomic, strong) ADPopupView *visiblePopup;
 
 @end
 
 @implementation MessageViewController
 @synthesize receiverDict, userDict;
+@synthesize mentionObj;
 
 - (id)init
 {
@@ -59,6 +62,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.view setBackgroundColor:[UIColor colorWithRed:240/255.0 green:241/255.0 blue:242/255.0 alpha:1.0]];
+    
+    self.lblTitle.text = mentionObj[@"CourtName"];
+    self.lblSubtitle.text = mentionObj[@"ClientName"];
+    self.lblLocation.text = mentionObj[@"CourtAddress"];
+    
+    NSDateFormatter *df1 = [[NSDateFormatter alloc] init];
+    [df1 setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
+    
+    NSDate *date1 = [df1 dateFromString:mentionObj[@"MentionDate"]];
+    [df1 setDateFormat:@"dd/MM/yyyy"];
+    self.lblDate.text = [df1 stringFromDate:date1];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageReceived:) name:@"didMessageReceived" object:nil];
     

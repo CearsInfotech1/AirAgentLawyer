@@ -36,6 +36,8 @@
                                                          JSQMessagesCollectionViewDelegateFlowLayout,
                                                          UITextViewDelegate>
 
+@property (nonatomic, weak) IBOutlet UILabel *lblTitle, *lblSubtitle, *lblLocation, *lblDate;
+
 @property (nonatomic, weak) IBOutlet UILabel *lblHeader;
 
 @property (nonatomic, weak) IBOutlet UIView *menuView;

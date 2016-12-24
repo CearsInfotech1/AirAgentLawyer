@@ -14,4 +14,6 @@
 @property (nonatomic, strong) NSMutableDictionary *receiverDict;
 @property (nonatomic, strong) NSMutableDictionary *userDict;
 
+@property (nonatomic, strong) NSDictionary *mentionObj;
+
 @end

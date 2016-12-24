@@ -27,6 +27,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         print("object",obj)
         self.statusType = obj.Status
+        
         let user_Data = NSUserDefaults.standardUserDefaults().objectForKey("USER_OBJECT") as? NSData
         
         if let userData = user_Data {
@@ -164,6 +165,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let messageView: MessageViewController = MessageViewController()
         messageView.receiverDict = NSMutableDictionary(dictionary: ["contactname":obj.ClientName,"toId": String(obj.MentionId)])
         messageView.userDict = NSMutableDictionary(dictionary: ["contactname":userDict["Token"] as! String, "token":userDict["Token"] as! String,"userid": String(userDict["userid"] as! Int)])
+        messageView.mentionObj = NSDictionary(dictionary: ["AgentId": String(obj.MentionId), "ClientName": obj.ClientName, "CourtAddress": obj.CourtAddress, "CourtCity": obj.CourtCity, "CourtName": obj.CourtName, "MentionDate": obj.MentionDate, "MentionId": String(obj.MentionId), "Principleid": String(obj.Principleid), "Status": String(obj.Status)]) as [NSObject : AnyObject]
         self.navigationController?.pushViewController(messageView, animated: true)
     }
     

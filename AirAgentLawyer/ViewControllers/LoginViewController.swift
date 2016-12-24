@@ -95,14 +95,6 @@ class LoginViewController: UIViewController, TpKeyboardDelegate {
         self.navigationController?.pushViewController(vcObj, animated: true)
     }
     
-    @IBAction func clkFBLogin(sender: UIButton) {
-        
-        self.view.endEditing(true)
-        
-        let vcObj = self.storyboard?.instantiateViewControllerWithIdentifier("HomeViewController") as! HomeViewController
-        self.navigationController?.pushViewController(vcObj, animated: true)
-    }
-    
     @IBAction func clkForgotPassword(sender: UIButton) {
         
         self.view.endEditing(true)

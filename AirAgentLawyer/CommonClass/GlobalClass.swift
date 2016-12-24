@@ -168,6 +168,20 @@ class GlobalClass: NSObject {
 //    return newImage;
 //    }
     
+    func isConnectedToNetwork() -> Bool {
+        
+        let reachability = Reachability.reachabilityForInternetConnection()
+        let status : NetworkStatus = reachability.currentReachabilityStatus()
+        if status == NotReachable
+        {
+            return false
+        }
+        else
+        {
+            return true
+        }
+    }
+    
     func startIndicator(msg : String)
     {
         var config : SwiftLoader.Config = SwiftLoader.Config()

@@ -58,10 +58,12 @@ class ChatListViewController: BaseViewController, UITableViewDelegate, UITableVi
                     if let object = object
                     {                        
                         let tempDic: NSDictionary = CommonClass.sharedInstance().dictionaryByReplacingNullsWithStrings(object as! [NSObject : AnyObject])
+                        print ("temp dic ", tempDic)
                         
                         if(tempDic["IsSuccess"] as! Bool == true)
                         {
                             print("dat ",tempDic["Data"])
+                            
                             if tempDic["Data"] != nil {
                                 let tempArr: NSArray = NSArray(array:tempDic["Data"] as! NSArray)
                                 self.arrOfChatList = NSMutableArray(array: tempArr)
@@ -160,6 +162,8 @@ class ChatListViewController: BaseViewController, UITableViewDelegate, UITableVi
                 messageView.userDict = NSMutableDictionary(dictionary: ["contactname":userData_val["Token"] as! String, "token":userData_val["Token"] as! String,"userid": String(userData_val["userid"] as! Int)])
             }
         }
+        
+        messageView.mentionObj = NSDictionary(dictionary: ["AgentId": String(obj["MentionId"]), "ClientName": obj["ClientName"] as! String, "CourtAddress": obj["Address1"] as! String, "CourtName": obj["CourtName"] as! String, "MentionDate": obj["MentionDate"] as! String, "MentionId": String(obj["MentionId"] as! Int)]) as [NSObject : AnyObject]
         
         self.navigationController?.pushViewController(messageView, animated: true)
     }
