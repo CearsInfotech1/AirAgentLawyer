@@ -52,6 +52,11 @@ class PopupViewController: UIViewController, TpKeyboardDelegate {
     
     func getOutComes()
     {
+        if(!GlobalClass.sharedInstance.isConnectedToNetwork()) {
+            GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("No Internet Connection!", comment: "comm"))
+            return
+        }
+        
         //API Calling
         var dicOfOutcome : NSDictionary = NSDictionary()
         GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))
@@ -109,6 +114,11 @@ class PopupViewController: UIViewController, TpKeyboardDelegate {
         
         if NSString(format:"%@", txtViewDesc.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())) == "Description" {
             GlobalClass.sharedInstance.showAlert(NSLocalizedString("Message", comment: "comm"), msg: NSLocalizedString("Please enter Description", comment: "comm"))
+            return
+        }
+        
+        if(!GlobalClass.sharedInstance.isConnectedToNetwork()) {
+            GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("No Internet Connection!", comment: "comm"))
             return
         }
         

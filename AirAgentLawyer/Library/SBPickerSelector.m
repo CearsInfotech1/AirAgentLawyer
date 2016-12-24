@@ -48,16 +48,13 @@
 
 - (void) showPickerOver:(UIViewController *)parent{
 	
-	
 	UIWindow * window = [[UIApplication sharedApplication] keyWindow];
-	
 	
 	self.background = [[UIView alloc] initWithFrame:window.bounds];
 	[self.background setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.0]];
 	[window addSubview:self.background];
 	[window addSubview:self.view];
 	[parent addChildViewController:self];
-	
 	
 	UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
 	
@@ -264,6 +261,10 @@
     
 }
 
+- (void) setMinimumDateAllowed: (NSDate*)allowedDate {
+    self.datePickerView.minimumDate = [NSDate date];
+}
+
 -(CGSize) pickerSize{
 	CGSize size = self.view.frame.size;
 	
@@ -274,9 +275,7 @@
 		size.height = CGRectGetHeight(self.optionsToolBar.frame) + CGRectGetHeight(self.pickerView.frame);
 		size.width = CGRectGetWidth(self.pickerView.frame);
 	}
-	
-	
-	
+		
 	return size;
 }
 

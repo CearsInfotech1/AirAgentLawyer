@@ -59,6 +59,11 @@ class MentionDetailViewController: UIViewController {
 
     func getDetail()
     {
+        if(!GlobalClass.sharedInstance.isConnectedToNetwork()) {
+            GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("No Internet Connection!", comment: "comm"))
+            return
+        }
+        
         //API Calling
         var str : String = ""
         GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))

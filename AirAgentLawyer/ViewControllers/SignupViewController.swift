@@ -169,16 +169,14 @@ class SignupViewController: UIViewController, TpKeyboardDelegate,UICollectionVie
     
     func getCategory()
     {
-//        if(self.fromEditProfile == "yes")
-//        {
-//            
-//        }
-//        else
-//        {
-//            self.arrOfLawArea = []
-//        }
         self.arrOfCategory = []
         self.arrOfCategoryName = []
+        
+        
+        if(!GlobalClass.sharedInstance.isConnectedToNetwork()) {
+            GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("No Internet Connection!", comment: "comm"))
+            return
+        }
         
          //API Calling
         
@@ -423,6 +421,11 @@ class SignupViewController: UIViewController, TpKeyboardDelegate,UICollectionVie
         {
             print("call edit profile api",self.arrOfLawArea)
             
+            if(!GlobalClass.sharedInstance.isConnectedToNetwork()) {
+                GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("No Internet Connection!", comment: "comm"))
+                return
+            }
+            
             self.lawArea = self.arrOfLawArea.componentsJoinedByString("|")
             print("law area value",lawArea)
             
@@ -505,6 +508,11 @@ class SignupViewController: UIViewController, TpKeyboardDelegate,UICollectionVie
             
             self.lawArea = self.arrOfLawArea.componentsJoinedByString("|")
             print("law area value",lawArea)
+            
+            if(!GlobalClass.sharedInstance.isConnectedToNetwork()) {
+                GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("No Internet Connection!", comment: "comm"))
+                return
+            }
             
             GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))
             

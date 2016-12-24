@@ -181,6 +181,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func acceptRequest() {
         
+        if(!GlobalClass.sharedInstance.isConnectedToNetwork()) {
+            GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("No Internet Connection!", comment: "comm"))
+            return
+        }
+        
         GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))
         
         let str = "Agent/AcceptRequest?Mentionid="+String(obj.MentionId)+"&AgentId="+String(userDict["userid"] as! Int)
@@ -212,6 +217,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func rejectRequest() {
+        
+        if(!GlobalClass.sharedInstance.isConnectedToNetwork()) {
+            GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("No Internet Connection!", comment: "comm"))
+            return
+        }
         
         GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))
         

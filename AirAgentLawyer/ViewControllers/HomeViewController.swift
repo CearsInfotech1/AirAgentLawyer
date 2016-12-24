@@ -53,6 +53,11 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         self.arrOfMention = []
         var arrPost = []
         
+        if(!GlobalClass.sharedInstance.isConnectedToNetwork()) {
+            GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("No Internet Connection!", comment: "comm"))
+            return
+        }
+        
         //API Calling
         GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))
         
@@ -128,6 +133,11 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     {
         var arrMention = []
         self.arrOfMention = []
+        
+        if(!GlobalClass.sharedInstance.isConnectedToNetwork()) {
+            GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("No Internet Connection!", comment: "comm"))
+            return
+        }
         
         //API Calling
         GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))

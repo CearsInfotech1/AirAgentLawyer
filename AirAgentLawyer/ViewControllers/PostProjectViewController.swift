@@ -63,6 +63,11 @@ class PostProjectViewController: UIViewController ,UICollectionViewDataSource,UI
         self.arrOfCourt = []
         self.arrOfCourtName = []
         
+        if(!GlobalClass.sharedInstance.isConnectedToNetwork()) {
+            GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("No Internet Connection!", comment: "comm"))
+            return
+        }
+        
         //API Calling
         
         GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))
@@ -99,6 +104,11 @@ class PostProjectViewController: UIViewController ,UICollectionViewDataSource,UI
     {
         self.arrOfCategory = []
         self.arrOfCategoryName = []
+        
+        if(!GlobalClass.sharedInstance.isConnectedToNetwork()) {
+            GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("No Internet Connection!", comment: "comm"))
+            return
+        }
         
         //API Calling
         
@@ -215,6 +225,7 @@ class PostProjectViewController: UIViewController ,UICollectionViewDataSource,UI
     {
         picker.pickerType = SBPickerSelectorType.Date
         picker.datePickerType = SBPickerSelectorDateType.OnlyDay
+        picker.setMinimumDateAllowed(NSDate())
         
         self.view.endEditing(true)
         let point: CGPoint = view.convertPoint(sender.frame.origin, fromView: sender.superview)
@@ -229,8 +240,7 @@ class PostProjectViewController: UIViewController ,UICollectionViewDataSource,UI
     func pickerSelector(selector: SBPickerSelector!, selectedValue value: String!, index idx: Int)
     {
         self.btnCourt.setTitle(value, forState: UIControlState.Normal)
-         self.courtID = String(self.arrOfCourt.objectAtIndex(idx).valueForKey("CourtId") as! Int)
-        
+        self.courtID = String(self.arrOfCourt.objectAtIndex(idx).valueForKey("CourtId") as! Int)
     }
     
     func pickerSelector(selector: SBPickerSelector!, dateSelected date: NSDate!)
@@ -251,13 +261,12 @@ class PostProjectViewController: UIViewController ,UICollectionViewDataSource,UI
     @IBAction func btnDoneClick(sender : UIButton)
     {
         //self.lawArea = self.arrOfLawArea.componentsJoinedByString("|")
-
         
-        if (self.btnCourt.titleLabel!.text == NSLocalizedString("Select Court", comment: "comm") ){
+        if (self.btnCourt.titleLabel!.text == NSLocalizedString("Select Court", comment: "comm") ) {
             GlobalClass.sharedInstance.showAlert(NSLocalizedString("Message", comment: "comm"), msg: NSLocalizedString("Please select Court", comment: "comm"))
             return
         }
-        if (self.btnDate.titleLabel!.text == NSLocalizedString("Select Date", comment: "comm") ){
+        if (self.btnDate.titleLabel!.text == NSLocalizedString("Select Date", comment: "comm") ) {
             GlobalClass.sharedInstance.showAlert(NSLocalizedString("Message", comment: "comm"), msg: NSLocalizedString("Please select Date", comment: "comm"))
             return
         }
@@ -278,6 +287,11 @@ class PostProjectViewController: UIViewController ,UICollectionViewDataSource,UI
             return
         }
         
+        if(!GlobalClass.sharedInstance.isConnectedToNetwork()) {
+            GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("No Internet Connection!", comment: "comm"))
+            return
+        }
+        
         GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))
         
         let paramDic : NSMutableDictionary = NSMutableDictionary()
@@ -291,7 +305,6 @@ class PostProjectViewController: UIViewController ,UICollectionViewDataSource,UI
         let jsonData = try! NSJSONSerialization.dataWithJSONObject(paramDic, options: NSJSONWritingOptions())
         let jsonString = NSString(data: jsonData, encoding: NSUTF8StringEncoding) as! String
         print("json string",jsonString)
-        
         
         //API Calling
         

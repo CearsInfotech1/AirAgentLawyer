@@ -136,6 +136,11 @@ class MyScheduleViewController: UIViewController,RSDFDatePickerViewDelegate , RS
 
     func getScheduleData()
     {
+        if(!GlobalClass.sharedInstance.isConnectedToNetwork()) {
+            GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("No Internet Connection!", comment: "comm"))
+            return
+        }
+        
         //API Calling
         var arrMention : NSArray = NSArray()
         

@@ -68,6 +68,11 @@ class ProfileViewController: UIViewController,UIActionSheetDelegate, UINavigatio
     {
         //API Calling
         
+        if(!GlobalClass.sharedInstance.isConnectedToNetwork()) {
+            GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("No Internet Connection!", comment: "comm"))
+            return
+        }
+        
         GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))
         
         let str = "Profile/GetUserById?UserId="+self.agentID
@@ -206,6 +211,10 @@ class ProfileViewController: UIViewController,UIActionSheetDelegate, UINavigatio
     
     func uploadPic()
     {
+        if(!GlobalClass.sharedInstance.isConnectedToNetwork()) {
+            GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("No Internet Connection!", comment: "comm"))
+            return
+        }
       
         GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))
       

@@ -71,9 +71,9 @@ class AddScheduleViewController: UIViewController,SBPickerSelectorDelegate {
         self.arrOfCourtName = []
         
         //API Calling
-        
         if(!GlobalClass.sharedInstance.isConnectedToNetwork()) {
             GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("No Internet Connection!", comment: "comm"))
+            return
         }
         
         GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))
@@ -163,6 +163,11 @@ class AddScheduleViewController: UIViewController,SBPickerSelectorDelegate {
         }
         if NSString(format:"%@", nextHrRate.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())).length == 0 {
             GlobalClass.sharedInstance.showAlert(NSLocalizedString("Message", comment: "comm"), msg: NSLocalizedString("Please enter Next Hour Rate", comment: "comm"))
+            return
+        }
+        
+        if(!GlobalClass.sharedInstance.isConnectedToNetwork()) {
+            GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("No Internet Connection!", comment: "comm"))
             return
         }
         

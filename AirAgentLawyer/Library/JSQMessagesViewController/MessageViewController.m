@@ -170,6 +170,13 @@
 
 -(void) getMessageMethod {
     
+    if (![[GlobalClass sharedInstance] isConnectedToNetwork]) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"AirAgentlawyer" message:NSLocalizedString(@"No Internet Connection!", @"comm") delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
     [[GlobalClass sharedInstance] startIndicator:NSLocalizedString(@"Loading...", @"comment")];
     
     NSString *BASE_URL = @"http://api.airagentapp.com.au/Api";
@@ -441,6 +448,13 @@
     NSString *BASE_URL = @"http://api.airagentapp.com.au/Api";
     
     NSString *apiurl = [NSString stringWithFormat:@"%@/Profile/AddChathistory", BASE_URL];
+    
+    if (![[GlobalClass sharedInstance] isConnectedToNetwork]) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"AirAgentlawyer" message:NSLocalizedString(@"No Internet Connection!", @"comm") delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:apiurl]];
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -846,19 +860,19 @@ NSString* Date2String(NSDate *date)
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapAvatarImageView:(UIImageView *)avatarImageView atIndexPath:(NSIndexPath *)indexPath {
     
-    NSDictionary *item = items[indexPath.item];
-    
-    if ([self incoming:item]) {
-        
-        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        
+//    NSDictionary *item = items[indexPath.item];
+//    
+//    if ([self incoming:item]) {
+//        
+//        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//        
 //        Profile *Obj = [storyBoard instantiateViewControllerWithIdentifier:@"Profile"];
 //        Obj.isFromHome = @"1";
 //        Obj.strUserID = item[@"fromId"];
 //        [self.navigationController pushViewController:Obj animated:YES];
 //        UINavigationController *rootViewController = (UINavigationController *) self.view.window.rootViewController;
 //        [rootViewController pushViewController:Obj animated:YES];
-    }
+//    }
 }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapCellAtIndexPath:(NSIndexPath *)indexPath touchLocation:(CGPoint)touchLocation {
