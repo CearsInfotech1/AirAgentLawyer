@@ -37,6 +37,11 @@ class LoginViewController: UIViewController, TpKeyboardDelegate {
             return
         }
         
+        if(!GlobalClass.sharedInstance.isConnectedToNetwork()) {
+            GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("No Internet Connection!", comment: "comm"))
+            return
+        }
+        
         GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))
         
         let paramDic : NSMutableDictionary = NSMutableDictionary()

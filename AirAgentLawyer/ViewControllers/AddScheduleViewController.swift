@@ -72,6 +72,10 @@ class AddScheduleViewController: UIViewController,SBPickerSelectorDelegate {
         
         //API Calling
         
+        if(!GlobalClass.sharedInstance.isConnectedToNetwork()) {
+            GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("No Internet Connection!", comment: "comm"))
+        }
+        
         GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))
         
         let request = NSMutableURLRequest(URL: NSURL(string: BASE_URL+"/Principle/GetCourt")!)
@@ -95,7 +99,7 @@ class AddScheduleViewController: UIViewController,SBPickerSelectorDelegate {
                         {
                             if(self.arrOfCategory[i].valueForKey("CourtId") as! Int == self.objectVal.LocationId)
                             {
-                            self.btnCourt.setTitle(self.arrOfCategory[i].valueForKey("CourtName")! as? String, forState: UIControlState.Normal)
+                                self.btnCourt.setTitle(self.arrOfCategory[i].valueForKey("CourtName")! as? String, forState: UIControlState.Normal)
                                 self.courtID = String(self.arrOfCategory[i].valueForKey("CourtId")! as! Int)
                                 self.txtCity.text = self.arrOfCategory[i].valueForKey("City")! as? String
                                 self.txtState.text = self.arrOfCategory[i].valueForKey("State")! as? String
@@ -103,7 +107,7 @@ class AddScheduleViewController: UIViewController,SBPickerSelectorDelegate {
                                 self.txtAdd1.text = self.arrOfCategory[i].valueForKey("Address1")! as? String
                                 self.txtAdd2.text = self.arrOfCategory[i].valueForKey("Address2")! as? String
                             }
-                        self.arrOfCourtName.addObject(self.arrOfCategory[i].valueForKey("CourtName")!)
+                            self.arrOfCourtName.addObject(self.arrOfCategory[i].valueForKey("CourtName")!)
                         }
 
                     }
