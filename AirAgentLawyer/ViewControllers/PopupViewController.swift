@@ -79,12 +79,20 @@ class PopupViewController: UIViewController, TpKeyboardDelegate {
                     if let object = object
                     {
                         print("response object of view outcomes",object)
-                        dicOfOutcome = object.valueForKey("Result") as! NSDictionary
-                        self.txtTitle.text = dicOfOutcome.valueForKey("title") as? String
-                        self.txtTitle.textColor = UIColor(red: 0/255, green: 174/255, blue: 239/255, alpha: 1.0)
-                        self.txtViewDesc.text = dicOfOutcome.valueForKey("OutcomesDetail") as! String
-                        self.txtViewDesc.textColor = UIColor(red: 0/255, green: 174/255, blue: 239/255, alpha: 1.0)
-                        self.txtViewDesc.userInteractionEnabled = false
+                        
+                        if(!object.valueForKey("Result")!.isKindOfClass(NSNull))
+                        {
+                            dicOfOutcome = object.valueForKey("Result") as! NSDictionary
+                            self.txtTitle.text = dicOfOutcome.valueForKey("title") as? String
+                            self.txtTitle.textColor = UIColor(red: 0/255, green: 174/255, blue: 239/255, alpha: 1.0)
+                            self.txtViewDesc.text = dicOfOutcome.valueForKey("OutcomesDetail") as! String
+                            self.txtViewDesc.textColor = UIColor(red: 0/255, green: 174/255, blue: 239/255, alpha: 1.0)
+                        }
+                        else {
+                            self.txtViewDesc.text = "No Outcomes"
+                            self.txtViewDesc.userInteractionEnabled = false
+                            self.txtTitle.userInteractionEnabled = false
+                        }
                     }
                 }
             })

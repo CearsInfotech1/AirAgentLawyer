@@ -29,6 +29,8 @@ class MentionDetailViewController: UIViewController {
     @IBOutlet var Description : UILabel!
     @IBOutlet var descView : UIView!
     
+    @IBOutlet var heightlayout: NSLayoutConstraint!
+    
     @IBOutlet var scrollView: UIScrollView!
     
     var objOfMention : MentionRequest = MentionRequest()
@@ -40,6 +42,8 @@ class MentionDetailViewController: UIViewController {
     var userType : Int!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        heightlayout.constant = 65.0
 
         // Do any additional setup after loading the view.
         let user_Data = NSUserDefaults.standardUserDefaults().objectForKey("USER_OBJECT") as? NSData
@@ -53,6 +57,10 @@ class MentionDetailViewController: UIViewController {
                 self.userType = userData_val.valueForKey("UserType") as! Int
             }
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         self.getDetail()
     }
@@ -71,7 +79,7 @@ class MentionDetailViewController: UIViewController {
         {
             str = "Agent/FullmentionDetail?MentionId="+String(objOfMention.MentionId)
         }
-        else if(self.userType == 2)
+        else if(self.userType == 2 || self.userType == 3)
         {
             str = "Agent/FullmentionDetail?MentionId="+String(principleObj.MentionId)
         }
@@ -108,11 +116,10 @@ class MentionDetailViewController: UIViewController {
                         self.courtAdd1.text = self.respone.valueForKey("Address1") as? String
                         self.courtAdd2.text = self.respone.valueForKey("Address2") as? String
                         self.Description.text = self.respone.valueForKey("Note") as? String
-                        
                         let descVal : String = (self.respone.valueForKey("Note") as? String)!
                         let sizeHeight = descVal.heightWithConstrainedWidth(self.Description.frame.size.width, font: UIFont.systemFontOfSize(17.0))
-                        self.descView.frame.size.height = sizeHeight + 10
-                        self.Description.frame = CGRectMake(self.Description.frame.origin.x, (self.descView.frame.size.height / 2.0) - (sizeHeight / 2.0), self.Description.frame.size.width, sizeHeight)
+                        self.descView.frame.size.height = max(sizeHeight + 10, 65.0)
+                        self.heightlayout.constant = max(sizeHeight + 2, 57.0)
                         self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.descView.frame.origin.y + self.descView.frame.size.height + 50)
                     }
                 }

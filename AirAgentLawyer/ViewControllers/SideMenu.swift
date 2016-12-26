@@ -48,22 +48,30 @@ class SideMenu: UIViewController {
         }
         if(self.userType == 1)
         {
-            ArrUserMenu  = ["Home", "My Schedule", "Chat", "My Profile", "Logout"]
-            ArrUserMenuImage = ["ic_drawer_home","ic_drawer_calendar","ic_drawer_chat","ic_drawer_profile","ic_drawer_logout"]
+//            ArrUserMenu  = ["Home", "My Schedule", "Chat", "My Profile", "Logout"]
+//            ArrUserMenuImage = ["ic_drawer_home","ic_drawer_calendar","ic_drawer_chat","ic_drawer_profile","ic_drawer_logout"]
+            
+            ArrUserMenu  = ["Home", "My Schedule", "My Profile", "Logout"]
+            ArrUserMenuImage = ["ic_drawer_home","ic_drawer_calendar","ic_drawer_profile","ic_drawer_logout"]
         }
         else if(self.userType == 2)
         {
             print("call api for court")
-            ArrUserMenu  = ["Home", "Post Project", "Chat", "My Profile", "Logout"]
-            ArrUserMenuImage = ["ic_drawer_home","ic_drawer_calendar","ic_drawer_chat","ic_drawer_profile","ic_drawer_logout"]
+//            ArrUserMenu  = ["Home", "Post Project", "Chat", "My Profile", "Logout"]
+//            ArrUserMenuImage = ["ic_drawer_home","ic_drawer_calendar","ic_drawer_chat","ic_drawer_profile","ic_drawer_logout"]
+            
+            ArrUserMenu  = ["Home", "Post Project", "My Profile", "Logout"]
+            ArrUserMenuImage = ["ic_drawer_home","ic_drawer_calendar","ic_drawer_profile","ic_drawer_logout"]
             
         }
         else if(self.userType == 3)
         {
             print("call api for court")
-            ArrUserMenu  = ["Home","My Schedule", "Post Project", "Chat", "My Profile", "Logout"]
-            ArrUserMenuImage = ["ic_drawer_home","ic_drawer_calendar","ic_drawer_calendar","ic_drawer_chat","ic_drawer_profile","ic_drawer_logout"]
+//            ArrUserMenu  = ["Home","My Schedule", "Post Project", "Chat", "My Profile", "Logout"]
+//            ArrUserMenuImage = ["ic_drawer_home","ic_drawer_calendar","ic_drawer_calendar","ic_drawer_chat","ic_drawer_profile","ic_drawer_logout"]
             
+            ArrUserMenu  = ["Home","My Schedule", "Post Project", "My Profile", "Logout"]
+            ArrUserMenuImage = ["ic_drawer_home","ic_drawer_calendar","ic_drawer_calendar","ic_drawer_profile","ic_drawer_logout"]
         }
     }
 

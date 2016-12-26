@@ -294,17 +294,16 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        
         if(self.userType == 1)
         {
             let vcObj = self.storyboard?.instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController
             let mentionObj = self.arrOfMention.objectAtIndex(indexPath.row) as! MentionRequest
             vcObj.obj = mentionObj
-             self.navigationController?.pushViewController(vcObj, animated: true)
+            self.navigationController?.pushViewController(vcObj, animated: true)
         }
         else if(self.userType == 2)
         {
-             let vcObj = self.storyboard?.instantiateViewControllerWithIdentifier("PrincipleDetailViewController") as! PrincipleDetailViewController
+            let vcObj = self.storyboard?.instantiateViewControllerWithIdentifier("PrincipleDetailViewController") as! PrincipleDetailViewController
             let postObj = self.arrOfMention.objectAtIndex(indexPath.row) as! PostProjectRequest
             vcObj.postRequest = postObj
             self.navigationController?.pushViewController(vcObj, animated: true)

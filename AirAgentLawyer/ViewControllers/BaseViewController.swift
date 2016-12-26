@@ -173,36 +173,30 @@ extension BaseViewController: DetailViewControllerDelegate {
                     }
                     else
                     {
-                        let Obj = self.storyboard?.instantiateViewControllerWithIdentifier(ChatListViewIdentifier) as! ChatListViewController
+                        let Obj = self.storyboard?.instantiateViewControllerWithIdentifier(ProfileViewIdentifier) as! ProfileViewController
                         self.navigationController?.pushViewController(Obj, animated: false)
+//                        let Obj = self.storyboard?.instantiateViewControllerWithIdentifier(ChatListViewIdentifier) as! ChatListViewController
+//                        self.navigationController?.pushViewController(Obj, animated: false)
                     }
                 }
 //                else if index == 3 {
 //                    let Obj = self.storyboard?.instantiateViewControllerWithIdentifier("MyOrderViewController") as! MyOrderViewController
 //                    self.navigationController?.pushViewController(Obj, animated: false)
 //                }*/
-                else if index == 3
-                {
-                    if(self.userTypeVal == 3)
-                    {
-                        let Obj = self.storyboard?.instantiateViewControllerWithIdentifier(ChatListViewIdentifier) as! ChatListViewController
-                        self.navigationController?.pushViewController(Obj, animated: false)
-                    }
-                    else
-                    {
-                        let Obj = self.storyboard?.instantiateViewControllerWithIdentifier(ProfileViewIdentifier) as! ProfileViewController
-                            self.navigationController?.pushViewController(Obj, animated: false)
-                    }
-                }
-//                else if index == 4 {
-//                    let Obj = self.storyboard?.instantiateViewControllerWithIdentifier("Notification") as! Notification
-//                    self.navigationController?.pushViewController(Obj, animated: false)
+//                else if index == 3
+//                {
+//                    if(self.userTypeVal == 3)
+//                    {
+//                        let Obj = self.storyboard?.instantiateViewControllerWithIdentifier(ChatListViewIdentifier) as! ChatListViewController
+//                        self.navigationController?.pushViewController(Obj, animated: false)
+//                    }
+//                    else
+//                    {
+//                        let Obj = self.storyboard?.instantiateViewControllerWithIdentifier(ProfileViewIdentifier) as! ProfileViewController
+//                        self.navigationController?.pushViewController(Obj, animated: false)
+//                    }
 //                }
-               /* else if index == 4 {
-                    let Obj = self.storyboard?.instantiateViewControllerWithIdentifier("SettingViewController") as! SettingViewController
-                    self.navigationController?.pushViewController(Obj, animated: false)
-                }*/
-                else if index == 4
+                else if index == 3
                 { // Logout
                     if(self.userTypeVal == 3)
                     {
@@ -218,7 +212,7 @@ extension BaseViewController: DetailViewControllerDelegate {
                         }
                     }
                 }
-                else if index == 5
+                else if index == 4
                 {
                     if(self.userTypeVal == 3)
                     {

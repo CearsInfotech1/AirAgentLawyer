@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AgentPrincipleViewController: BaseViewController {
+class AgentPrincipleViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet var btnAgent : UIButton!
     @IBOutlet var btnPrinciple : UIButton!
@@ -42,15 +42,23 @@ class AgentPrincipleViewController: BaseViewController {
             }
         }
         self.btnClick = "agent"
-        self.getMentionRequest()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        if self.btnClick == "agent" {
+            self.getMentionRequest()
+        }
+        else {
+            self.getPendingPostRequest()
+        }
     }
 
     @IBAction func btnAgentClick(sender : UIButton)
     {
-        if(sender.selected)
-        {
-        }
-        else
+        if(!sender.selected)
         {
 //            GlobalClass.sharedInstance.bottomSelectedBorderColorSignup(self.lblAgent)
 //            GlobalClass.sharedInstance.bottomBorderColorSignup(self.lblPrinciple)
@@ -64,10 +72,7 @@ class AgentPrincipleViewController: BaseViewController {
     }
     @IBAction func btnPrincipalClick(sender : UIButton)
     {
-        if(sender.selected)
-        {
-        }
-        else
+        if(!sender.selected)
         {
             self.lblPrinciple.backgroundColor = Selected_Color
             self.lblAgent.backgroundColor = UIColor.clearColor()
@@ -296,7 +301,7 @@ class AgentPrincipleViewController: BaseViewController {
                 
                 cell.lblTitle.text = postObj.CourtName
                 cell.lblSubtitle.text = postObj.A_FirstName
-                cell.lblLocation.text = postObj.Address
+                cell.lblLocation.text = postObj.A_Address
                 
                 let formatter : NSDateFormatter = NSDateFormatter()
                 formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
@@ -327,6 +332,28 @@ class AgentPrincipleViewController: BaseViewController {
         }
     }
 
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if(self.arrOfMention.count > 0) {
+            
+            if(self.btnClick == "agent") {
+                
+                let vcObj = self.storyboard?.instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController
+                let mentionObj = self.arrOfMention.objectAtIndex(indexPath.row) as! MentionRequest
+                vcObj.obj = mentionObj
+                self.navigationController?.pushViewController(vcObj, animated: true)
+            }
+            else {
+                
+                let vcObj = self.storyboard?.instantiateViewControllerWithIdentifier("PrincipleDetailViewController") as! PrincipleDetailViewController
+                let postObj = self.arrOfMention.objectAtIndex(indexPath.row) as! PostProjectRequest
+                vcObj.postRequest = postObj
+                self.navigationController?.pushViewController(vcObj, animated: true)
+            }
+        }
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

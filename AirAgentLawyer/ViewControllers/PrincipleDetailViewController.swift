@@ -67,18 +67,17 @@ class PrincipleDetailViewController: UIViewController, UITableViewDataSource , U
         }
         else if(indexPath.row == 2)
         {
-            return 0
-//            if(self.statusType != nil)
-//            {
-//                if(self.statusType == 1)
-//                {
-//                    return 61
-//                }
-//                else
-//                {
-//                    return 0
-//                }
-//            }
+            if(self.statusType != nil)
+            {
+                if(self.statusType == 2)
+                {
+                    return 61
+                }
+                else
+                {
+                    return 0
+                }
+            }
         }
         else
         {
@@ -105,7 +104,12 @@ class PrincipleDetailViewController: UIViewController, UITableViewDataSource , U
             let cell:HomeCell = tableView.dequeueReusableCellWithIdentifier("HomeCell") as! HomeCell
             cell.lblTitle.text = postRequest.CourtName
             cell.lblSubtitle.text = postRequest.A_FirstName
-            cell.lblLocation.text = postRequest.Address
+            if userDict["UserType"] as! Int == 3 {
+                cell.lblLocation.text = postRequest.A_Address
+            }
+            else {
+                cell.lblLocation.text = postRequest.Address
+            }
             let formatter : NSDateFormatter = NSDateFormatter()
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
             let dt = formatter.dateFromString(postRequest.Date)
@@ -138,6 +142,48 @@ class PrincipleDetailViewController: UIViewController, UITableViewDataSource , U
             return cell
         }
     }
+    
+    //MARK: Accept clicked
+    @IBAction func btnAcceptClick(sender : UIButton) {
+        self.acceptRequest()
+    }
+    
+    func acceptRequest() {
+        
+        if(!GlobalClass.sharedInstance.isConnectedToNetwork()) {
+            GlobalClass.sharedInstance.showAlert(APP_Title, msg: NSLocalizedString("No Internet Connection!", comment: "comm"))
+            return
+        }
+        
+        GlobalClass.sharedInstance.startIndicator(NSLocalizedString("Loading...", comment: "comm"))
+        
+        let str = "Principle/AcceptMention?MentionId="+String(postRequest.MentionId)+"&UserId="+String(userDict["userid"] as! Int)
+        let request = NSMutableURLRequest(URL: NSURL(string: BASE_URL+str)!)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(userDict["Token"] as! String, forHTTPHeaderField: "Token")
+        request.addValue(String(userDict["userid"] as! Int), forHTTPHeaderField: "UserId")
+        
+        GlobalClass.sharedInstance.get(request, params: "") { (success, object) in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                print("obj",object)
+                if success {
+                    GlobalClass.sharedInstance.stopIndicator()
+                    
+                    if let object = object {
+                        print("response object",object)
+                        if(object.valueForKey("IsSuccess") as! Bool == true) {
+                            self.statusType = 3
+                            self.tblDetail.reloadData()
+                            GlobalClass.sharedInstance.showAlert(NSLocalizedString("Message", comment: "comm"), msg: NSLocalizedString("Accepted Successfully.", comment: "comm"))
+                        }
+                    }
+                }
+                else {
+                    GlobalClass.sharedInstance.stopIndicator()
+                }
+            })
+        }
+    }
 
     //MARK: View Detail clicked
     @IBAction func btnViewDetailClick(sender : UIButton)
@@ -154,6 +200,7 @@ class PrincipleDetailViewController: UIViewController, UITableViewDataSource , U
         
         messageView.receiverDict = NSMutableDictionary(dictionary: ["contactname":postRequest.A_FirstName,"toId": String(postRequest.MentionId)])
         messageView.userDict = NSMutableDictionary(dictionary: ["contactname":userDict["Token"] as! String, "token":userDict["Token"] as! String,"userid": String(userDict["userid"] as! Int)])
+        messageView.mentionObj = NSDictionary(dictionary: ["AgentId": String(postRequest.MentionId), "ClientName": postRequest.A_FirstName, "CourtAddress": postRequest.A_Address, "CourtCity": "", "CourtName": postRequest.CourtName, "MentionDate": postRequest.Date, "MentionId": String(postRequest.MentionId), "Principleid":"", "Status": String(postRequest.Status)]) as [NSObject : AnyObject]
         self.navigationController?.pushViewController(messageView, animated: true)
     }
     
